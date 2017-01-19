@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'note.apps.NoteConfig'
+    'note.apps.NoteConfig',
+    # 'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -125,6 +126,20 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_URL = '/static/'
+
+# REST_FRAMEWORK = {
+#     # Use Django's standard `django.contrib.auth` permissions,
+#     # or allow read-only access for unauthenticated users.
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#        'rest_framework.authentication.TokenAuthentication',
+#        # 'rest_framework.authentication.SessionAuthentication',
+#     ),
+#     # 'DEFAULT_PERMISSION_CLASSES': (
+#     #     # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+#     #     'rest_framework.permissions.IsAdminUser',
+#     # ),
+#     'PAGINATE_BY': 10
+# }
 
 try:
     from .local_settings import *

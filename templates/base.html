@@ -1,52 +1,48 @@
 <!DOCTYPE html>
 {% load static %}
-<html ng-app="app">
+<html>
 <head>
-    <title>JS/Django/Bootstrap/JQuery</title>
+    <title>Django/Bootstrap</title>
     <meta charset="utf-8">
-{#    <link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/favicon.ico"/>#}
+    <link href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABILAAASCwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKSnHIyQku6wgILHhLS28n9HR0kxHR8KIJia8pzc3sz8AAAAAAAAAAAAAAAAAAAAAiYnXmZmZ272bm9nBSUnAykFBvPclJbP/ISGt/y0tsv9eXl//Skpy/R0dsP81Nbu/UVH/AAAAAAAAAAAAAAD4AsPD5+6vr7H/goKD/zk5o/9NTbj/JSWx/yEhq/8tLa//UFBR/lFRUv8gIJv+LS2z/jMzwzYAAAAAAAAAAAcHxhDY2Oz9uLi6/6Skpf8zM6f/Rkav/yIirv8fH6n/LS2u/khISf1ISEj/NjZv/ioqsP+OjtaqAAAAAAAAAAAvL8Ar7Ozz/7W1tv+pqar/Kiql/zo6pP8NDaT/BASd/xAQof5CQkT8QUFB/0FBRv8SEpv/cXHH/IqK4CIAAAAAZ2fNSPb29/+hoaP/m5uc/yEhn/8nJ5n/AgKd/wEBmv8LC53+OztA/jw8PP8+Pj7/ICBw/y0tq/+Xl9iNAAAAAIqK02Xx8fP/qKio/6Wlp/8aGpr/GBiT/wUFm/8CApn/Cwuc/zg4Pf83Nzf/Ojo6/zY2R/8EBJb/GBih7gAAug2amtiB7e3v/7S0tf+oqLH/ExOW/xQUlP8GBpr/AwOX/wsLmv8zMzz/NjY2/zY2OP83Nzf/Ghp5/wAAk/8AAJxmpKTant7e4f+Wlpb/hoaX/xgYmP8XF5f/BweX/wQElv8MDJf/MDBE/zIyN/8xMTz/NTU1/y4uTf8CApL/BQWO2K+v3rvf3+L/qKiq/4qKpf8jI57/GRmZ/wUFlP8DA5P/DAyV/y4uVf8sLEH/LCxL/zIyNv8zM0D/GRmQ+wMDmYWqqtnYzs7T/5mZmv96epn/EBCW/wkJk/8aGpv/BweT/wsLlP8pKXL/Li5v/ysrhf85OYD2OTmYpEBAly0AAAAAWlq4u3p6wdB+fsTXdXW+xyIimbk5OZzOPDyN3k1NocUsLIq5LS14mzg4hHQ4OG9LSkpQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAP//AAD4BwAAgAMAAAADAAAAAwAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAHAAD//wAA//8AAA=="
+          rel="icon" type="image/x-icon">
+    {#    <link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/favicon.ico"/>#}
     <!-- deploy static -->
-{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">#}
-{#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>#}
-{#    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
-{#    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>#}
-{#    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.32/angular-route.js"></script>#}
+    {#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">#}
+    {#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>#}
+    {#    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
     <!-- local dev static -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap-theme.css' %}">
     <script type="text/javascript" src="{% static 'js/lib/jquery-3.1.1.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/lib/bootstrap.js' %}"></script>
-    <script src="{% static 'js/lib/angular-1.2.32.js' %}"></script>
-    <script src="{% static 'js/lib/angular-route.js' %}"></script>
     <!-- personal static -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
-    <script src="{% static 'js/app.js' %}"></script>
 </head>
-<body >
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                  </button>
-                <a class="navbar-brand" href="/">Portfolio</a>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar" ng-controller="jsonAbout">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="/">Home</a></li>
-                    <li ><a href="" ng-click="toServer()">About</a></li>
-                    <li><a href="/gallery">Gallery</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                </ul>
-            </div>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Test_blog</a>
         </div>
-    </nav>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="{% block index %}{% endblock %}"><a href="{% url 'index' %}">Home</a></li>
+                <li class="{% block about %}{% endblock %}"><a href="{% url 'about' %}">About</a></li>
+                <li class="{% block contact %}{% endblock %}"><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login / Register</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div id="particles"></div>
 {% block content %}{% endblock %}
 
