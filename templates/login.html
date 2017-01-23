@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <div class="main">
+        <div class="container" >
+            <p style="margin: 0.4em;">
+                <p><a href="{% url 'social:begin' 'facebook' %}">Enter Facebook</a></p>
+                <p><a href="{% url 'social:begin' 'github' %}">Enter Github</a></p>
+            </p>
+        </div>
+    </div>
+{% endblock %}

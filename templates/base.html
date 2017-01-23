@@ -38,7 +38,21 @@
                 <li class="{% block contact %}{% endblock %}"><a href="{% url 'contact' %}">Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login / Register</a></li>
+
+                {% if user.is_authenticated %}
+                    {% if user.visitor.image_url %}
+                        <li><a><img src="{{ user.visitor.image_url }}" height="20"></a></li>
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                        <li><a><img src="{% static 'images/logo.png' %}" height="20"></a></li>
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% endif %}
+                {% else %}
+                    <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in">
+                        </span> Login / Register</a>
+                    </li>
+                {% endif %}
+
             </ul>
         </div>
     </div>
