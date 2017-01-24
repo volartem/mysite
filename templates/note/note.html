@@ -6,14 +6,16 @@
         <div class="container" >
             Test html for note detail
         </div>
-        <div class="container" >
-            Add comment
-            <form>
-                <div class="form-group">
-                    <textarea class="form-control"></textarea>
-                </div>
-                <button type="submit" class="btn btn-default">Add comment</button>
-            </form>
-        </div>
+        {% if user.is_authenticated %}
+            <div class="container" >
+                Add comment
+                <form>
+                    <div class="form-group">
+                        <textarea class="form-control"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-default">Add comment</button>
+                </form>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

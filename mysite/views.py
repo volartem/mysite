@@ -43,6 +43,20 @@ def profile(request):
     # to_api_f = requests.get('https://graph.facebook.com/me/photos', params={'access_token': access_token})
     # print(to_api)
     return render(request, 'profile.html')
+
+def register_by_access_token(request, backend):
+    # This view expects an access_token GET parameter, if it's needed,
+    # request.backend and request.strategy will be loaded with the current
+    # backend and strategy.
+    token = request.GET.get('access_token')
+    user = request.backend.do_auth(request.GET.get('access_token'))
+    if user:
+        login(request, user)
+        return 'OK'
+    else:
+        return 'ERROR'
+
+
 def loginn(request):
     print('login')
     # social = request.user.social_auth.get(provider='facebook')

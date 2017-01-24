@@ -1,9 +1,10 @@
 # django_project/visitor/pipeline.py
-import requests
-from slugify import slugify
-from django.core.files.base import ContentFile
+# import requests
+# from social_django.models import UserSocialAuth
+# from slugify import slugify
+# from django.core.files.base import ContentFile
 
-# Процедура для pipiline, сохраняющая изображение.
+
 def save_user_data(backend, user, response, is_new=False, *args, **kwargs):
 
     if not is_new:
@@ -19,3 +20,15 @@ def save_user_data(backend, user, response, is_new=False, *args, **kwargs):
         user.save()
     except:
         print('error_save')
+
+
+# Only for example from Off_site
+# def save_profile(backend, user, response, *args, **kwargs):
+#     if backend.name == 'facebook':
+#         profile = user.get_profile()
+#         if profile is None:
+#             profile = UserSocialAuth(user_id=user.id)
+#         profile.gender = response.get('gender')
+#         profile.link = response.get('link')
+#         profile.timezone = response.get('timezone')
+#         profile.save()
