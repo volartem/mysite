@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'note.apps.NoteConfig',
-    # 'social.apps.django_app.default',
     'social_core',
     'social_django',
     'visitor.apps.VisitorConfig',
@@ -50,6 +49,8 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'social_core.backends.facebook.FacebookOAuth2',
     'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    # 'social_core.backends.google.BaseGoogleOAuth2API',
 )
 
 MIDDLEWARE = [
@@ -169,7 +170,7 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
 )
-
+SOCIAL_AUTH_USER_MODEL = 'visitor.Visitor'
 SOCIAL_AUTH_SANITIZE_REDIRECTS = True
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 
@@ -179,7 +180,6 @@ SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
   'locale': 'ru_RU',
   'fields': 'id, name, email'
 }
-
 
 
 try:

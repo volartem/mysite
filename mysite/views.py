@@ -80,3 +80,8 @@ def loginn(request):
 def auth_logout(request):
     logout(request)
     return redirect('index')
+
+def save_comment(request):
+    print(request)
+    notes = Note.objects.all().order_by('id')
+    return render(request, 'index.html', {'notes': notes})

@@ -11,7 +11,7 @@
         {% if user.is_authenticated %}
             <div class="container">
                 Add comment
-                <form>
+                <form action="{% url 'comment_save' %}">
                     <div class="form-group">
                         <textarea class="form-control"></textarea>
                     </div>
