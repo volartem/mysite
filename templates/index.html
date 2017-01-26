@@ -10,7 +10,7 @@
             <div class="container" >
                 <h1>{{ note.title }}</h1>
                 <h3>{{ note.id }}</h3>
-                {{ note.text | truncatechars:20 }}
+                {{ note.text|safe|truncatechars:20 }}
                  <a href="{% url 'note' note.id %}"><b>Читать полностью</b></a>
                 <!-- to view comments -->
 {#                {% for coment in note.comments.all %}#}

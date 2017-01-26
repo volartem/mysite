@@ -58,7 +58,9 @@
     </div>
 </nav>
 <div id="particles"></div>
-{% block content %}{% endblock %}
+{#{% autoescape off %}#}
+    {% block content %}{% endblock %}
+{#{% endautoescape %}#}
 
 </body>
 </html>
