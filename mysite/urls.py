@@ -34,7 +34,7 @@ urlpatterns = [
     url(r'^social/', include('social_django.urls', namespace='social')),
     url(r'^accounts/profile/', views.profile),
     url(r'^accounts/login/', views.loginn),
-    url(r'^save/comment/$', views.save_comment, name='comment_save'),
+    # url(r'^save/comment/$', views.save_comment, name='comment_save'),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

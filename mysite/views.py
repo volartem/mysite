@@ -44,19 +44,6 @@ def profile(request):
     # print(to_api)
     return render(request, 'profile.html')
 
-def register_by_access_token(request, backend):
-    # This view expects an access_token GET parameter, if it's needed,
-    # request.backend and request.strategy will be loaded with the current
-    # backend and strategy.
-    token = request.GET.get('access_token')
-    user = request.backend.do_auth(request.GET.get('access_token'))
-    if user:
-        login(request, user)
-        return 'OK'
-    else:
-        return 'ERROR'
-
-
 def loginn(request):
     print('login')
     # social = request.user.social_auth.get(provider='facebook')
@@ -81,7 +68,7 @@ def auth_logout(request):
     logout(request)
     return redirect('index')
 
-def save_comment(request):
-    print(request)
-    notes = Note.objects.all().order_by('id')
-    return render(request, 'index.html', {'notes': notes})
+# def save_comment(request):
+#     print(request)
+#     notes = Note.objects.all().order_by('id')
+#     return render(request, 'index.html', {'notes': notes})

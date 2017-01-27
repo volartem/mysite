@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'social_core',
     'social_django',
     'ckeditor',
-    'ckeditor_uploader',
+    'ckeditor_uploader'
     # 'rest_framework',
 ]
 
@@ -168,16 +168,6 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
 )
-SOCIAL_AUTH_USER_MODEL = 'visitor.Visitor'
-SOCIAL_AUTH_SANITIZE_REDIRECTS = True
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
-
-SOCIAL_AUTH_GITHUB_SCOPE = ['user:email']
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
-SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
-  'locale': 'ru_RU',
-  'fields': 'id, name, email'
-}
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
