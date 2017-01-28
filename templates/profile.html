@@ -1,11 +1,26 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block profile %}active{% endblock %}
 
 
 {% block content %}
     <div class="main">
-        <div class="container" >
-            <p>Test profile page</p>
-            <img src="{{ user.visitor.image_url }}" height="50">
+        <div class="container">
+            {% if user.is_authenticated %}
+                <p><b>{{ user.username|capfirst }}</b> profile page</p>
+                {% if user.visitor.image_url %}
+                    <p><img src="{{ user.visitor.image_url }}" height="200"></p>
+                {% else %}
+                    <p><img src="{% static 'images/logo.png' %}" height="200"></p>
+                {% endif %}
+                <p><b>First name:</b> {{ user.first_name }}</p>
+                <p><b>Last name:</b> {{ user.last_name }}</p>
+                <p><b>Username:</b> {{ user.username }}</p>
+                <p><b>Email:</b> {{ user.email }}</p>
+            {% else %}
+                <p>Sorry, but you are not authorized</p>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from .models import Note, Comment
+from .models import Note
 from .forms import CommentModelForm
-from django.views.generic.edit import FormView
+from django.contrib import messages
 # Create your views here.
 
 def note_detail(request, pk):
@@ -14,12 +14,10 @@ def add_comment(request, pk):
         form = CommentModelForm(request.POST or None, user=request.user, pk=pk)
         if form.is_valid():
             form.save()
-            # messages.success(request, "Course {0} has been successfully added.".format(model_form.cleaned_data['name']))
+            messages.success(request, "Your comment has been successfully added.", extra_tags='success')
             return redirect('note', pk)
         else:
+            messages.success(request, "Please try again.", extra_tags='info')
             return redirect('note', pk)
-    # else:
-    #     model_form = CommentModelForm()
-    # return render(request, 'courses/add.html', {'model': model_form})
 
 

@@ -4,11 +4,11 @@
 {% block content %}
     <div class="main">
         <div class="container" >
-            <p style="margin: 0.4em;">
+            <h4>Login with social account:</h4>
             <p><a href="{% url 'social:begin' 'facebook' %}"><b>Login with Facebook</b></a></p>
             <p><a href="{% url 'social:begin' 'github' %}"><b>Login with Github</b></a></p>
             <p><a href="{% url 'social:begin' 'google-oauth2' %}"><b>Login with Google</b></a></p>
-            </p>
+
         </div>
     </div>
 {% endblock %}

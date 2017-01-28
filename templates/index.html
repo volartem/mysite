@@ -7,16 +7,41 @@
 {% block content %}
     <div class="main">
         {% for note in notes %}
-            <div class="container" >
-                <h1>{{ note.title }}</h1>
-                <h3>{{ note.id }}</h3>
+            <div class="container">
+                <h3>{{ note.title }}</h3>
                 {{ note.text|safe|truncatechars:20 }}
-                 <a href="{% url 'note' note.id %}"><b>Читать полностью</b></a>
+                <a href="{% url 'note' note.id %}"><b>Читать полностью</b></a>
                 <!-- to view comments -->
-{#                {% for coment in note.comments.all %}#}
-{#                    <h4>Comment_title</h4>{{ coment.title }}#}
-{#                {% endfor %}#}
+                {#                {% for coment in note.comments.all %}#}
+                {#                    <h4>Comment_title</h4>{{ coment.title }}#}
+                {#                {% endfor %}#}
             </div>
         {% endfor %}
+        <div class="index">
+            <ul class="pagination pagin">
+
+                {% if notes.has_previous %}
+                    <li><a href="?page={{ notes.previous_page_number }}"><< previous</a></li>
+                {% else %}
+                    <li><a href="?page={{ notes.number }}"><< previous</a></li>
+                {% endif %}
+
+                {% for page in notes.paginator.page_range %}
+                    {% if page == notes.number %}
+                        <li class="active"><a href="">{{ page }}<span class="sr-only"></span></a></li>
+                    {% else %}
+                        <li><a href="?page={{ page }}">{{ page }}<span class="sr-only"></span></a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if notes.has_next %}
+                    <li><a href="?page={{ notes.next_page_number }}">next >></a></li>
+                {% else %}
+                    <li><a href="?page={{ notes.number }}">next >></a></li>
+                {% endif %}
+
+            </ul>
+        </div>
     </div>
+
 {% endblock %}
