@@ -15,7 +15,7 @@
         </div>
         {% if user.is_authenticated %}
             <div class="container">
-                <p>ADD COMMENT</p>
+                <p>Оставьте комментарий</p>
                 <form action="{% url 'add_comment' note.id %}" method="post">
                     {% csrf_token %}
                     <div class="form-group">
@@ -30,7 +30,7 @@
         {% else %}
 
                 <div class="alert alert-info alert-dismissible " role="alert">
-                    <p>Чтобы оставит комментарий к записе, залогиньтесь</p>
+                    <p>Чтобы оставить комментарий к записе, залогиньтесь</p>
                 </div>
 
         {% endif %}

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Note
 from .forms import CommentModelForm
 from django.contrib import messages
-# Create your views here.
+
 
 def note_detail(request, pk):
     note = Note.objects.get(id=pk)

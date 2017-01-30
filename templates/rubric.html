@@ -6,7 +6,7 @@
         {% for note in notes %}
             <div class="container">
                 <h3>{{ note.title }}</h3>
-                {{ note.text|safe|truncatechars:20 }}
+                {{ note.text|safe|truncatechars:250 }}
                 <a href="{% url 'note' note.id %}"><b>Читать полностью</b></a>
             </div>
         {% endfor %}

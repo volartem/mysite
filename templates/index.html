@@ -9,12 +9,8 @@
         {% for note in notes %}
             <div class="container">
                 <h3>{{ note.title }}</h3>
-                {{ note.text|safe|truncatechars:50 }}
+                {{ note.text|truncatechars:250|safe }}
                 <a href="{% url 'note' note.id %}"><b>Читать полностью</b></a>
-                <!-- to view comments -->
-                {#                {% for coment in note.comments.all %}#}
-                {#                    <h4>Comment_title</h4>{{ coment.title }}#}
-                {#                {% endfor %}#}
             </div>
         {% endfor %}
 

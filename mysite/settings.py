@@ -44,16 +44,13 @@ INSTALLED_APPS = [
     'social_django',
     'ckeditor',
     'ckeditor_uploader'
-    # 'rest_framework',
 ]
 
 AUTHENTICATION_BACKENDS = (
-    # 'social.backends.facebook.FacebookAppOAuth2',
     'django.contrib.auth.backends.ModelBackend',
     'social_core.backends.facebook.FacebookOAuth2',
     'social_core.backends.github.GithubOAuth2',
     'social_core.backends.google.GoogleOAuth2',
-    # 'social_core.backends.google.BaseGoogleOAuth2API',
 )
 
 MIDDLEWARE = [
@@ -141,21 +138,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-
-
-# REST_FRAMEWORK = {
-#     # Use Django's standard `django.contrib.auth` permissions,
-#     # or allow read-only access for unauthenticated users.
-#     'DEFAULT_AUTHENTICATION_CLASSES': (
-#        'rest_framework.authentication.TokenAuthentication',
-#        # 'rest_framework.authentication.SessionAuthentication',
-#     ),
-#     # 'DEFAULT_PERMISSION_CLASSES': (
-#     #     # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
-#     #     'rest_framework.permissions.IsAdminUser',
-#     # ),
-#     'PAGINATE_BY': 10
-# }
 
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',

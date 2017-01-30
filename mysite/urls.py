@@ -18,8 +18,7 @@ from django.contrib import admin
 from mysite import views
 from django.conf.urls.static import static
 from mysite import settings
-# from rest_framework.urlpatterns import format_suffix_patterns
-# from django.views.generic import TemplateView
+
 
 
 

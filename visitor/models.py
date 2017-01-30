@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-from social_django.models import AbstractUserSocialAuth, UserSocialAuth, UserSocialAuthManager
-# Create your models here.
+from social_django.models import AbstractUserSocialAuth, UserSocialAuth
+
 
 class Visitor(User):
     uid = models.CharField(max_length=255, blank=True, null=True)
