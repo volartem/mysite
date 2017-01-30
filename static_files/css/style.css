@@ -109,6 +109,8 @@ input {
     margin: 20px auto;
     padding: 10px;
     background: rgba(0, 1, 2, 0.5);
+    width: 100%;
+    display: inline-block;
 }
 
 .container a {
@@ -131,16 +133,48 @@ textarea {
   color: rgba(100, 100, 100, 1);
 }
 .pagination > li > a:hover {
-  background: rgba(100, 100, 100, 1);
-  color: rgba(0, 1, 2, 0.5);
-  border-color: transparent;
+    border-color: rgba(0, 1, 2, 0.5);
+    color: #fff;
+    background-color: transparent;
 }
 .pagination > .active > a,
 .pagination > .active > a:hover{
-  background: rgba(100, 100, 100, 1);
-  color: rgba(0, 1, 2, 0.5);
-  border-color: rgba(0, 1, 2, 0.5);
+    border-color: rgba(0, 1, 2, 0.5);
+    color: #fff;
+    background-color: #080808;
 }
 .index{
     text-align: center;
+}
+
+.rubric{
+    display: inline-block;
+    background-color: rgba(40, 43, 46, 0.9);;
+    padding: 4px;
+    color: rgba(100, 100, 100, 1);
+    text-shadow: none;
+    border-radius: 4px;
+    width: auto;
+    float: right;
+}
+.code{
+    display: inline-block;
+    background-color: rgba(40, 43, 46, 0.9);;
+    padding: 4px;
+    color: rgba(200, 200, 200, 1);
+    text-shadow: none;
+    border-radius: 4px;
+    width: 100%;
+    float: left;
+    /*opacity: 0.7;*/
+}
+.main{
+    float: left;
+    padding-left: 0;
+}
+.nav > li > a:hover, .nav > li > a:focus, .nav > .active {
+    background: rgba(0, 1, 2, 0.5);
+}
+.im {
+    opacity: 0.9;
 }

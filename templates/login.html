@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
 
 
-{% block content %}
-    <div class="main">
-        <div class="container" >
-            <h4>Login with social account:</h4>
-            <p><a href="{% url 'social:begin' 'facebook' %}"><b>Login with Facebook</b></a></p>
-            <p><a href="{% url 'social:begin' 'github' %}"><b>Login with Github</b></a></p>
-            <p><a href="{% url 'social:begin' 'google-oauth2' %}"><b>Login with Google</b></a></p>
+{% block login %}active{% endblock %}
 
+
+{% block content %}
+    <div class="main col-sm-10">
+        <div class="container" >
+            <h4>Войдите через социальные аккаунты:</h4>
+            <p><a href="{% url 'social:begin' 'facebook' %}"><b> Facebook</b></a></p>
+            <p><a href="{% url 'social:begin' 'github' %}"><b> GitHub</b></a></p>
+            <p><a href="{% url 'social:begin' 'google-oauth2' %}"><b> Google</b></a></p>
         </div>
     </div>
 {% endblock %}

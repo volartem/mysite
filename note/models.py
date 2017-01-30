@@ -7,6 +7,7 @@ class Note(models.Model):
     title = models.CharField(max_length=255)
     text = RichTextUploadingField(blank=True, default='')
     date_create = models.DateField(auto_now=True)
+    rubric = models.CharField(max_length=255, default='Other')
 
     def __str__(self):
         return self.title

@@ -3,9 +3,13 @@
 
 {% block content %}
 
-    <div class="main">
+    <div class="main col-sm-10">
         <div class="container">
-            Test html for note detail
+            <div class="rubric">
+                <p>
+                    Рубрика: <a href="{% url 'rubric' note.rubric %}">{{ note.rubric }}</a>  {{ note.date_create }}
+                </p>
+            </div>
             <h3>{{ note.title }}</h3>
             {{ note.text|safe }}
         </div>
@@ -24,15 +28,15 @@
                 </form>
             </div>
         {% else %}
-            <div class="container">
+
                 <div class="alert alert-info alert-dismissible " role="alert">
-                    <p>Please login to add comment for this note</p>
+                    <p>Чтобы оставит комментарий к записе, залогиньтесь</p>
                 </div>
-            </div>
+
         {% endif %}
         {% for coment in note.comments.all %}
             <div class="container">
-                <p>{{ coment.owner.username|capfirst }} оставил комментарий</p>
+                <p><strong>{{ coment.owner.username|capfirst }}</strong> оставил комментарий</p>
                 <h4>{{ coment.title }}</h4>
                 {{ coment.text }}
             </div>

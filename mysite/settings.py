@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'note.apps.NoteConfig',
     'visitor.apps.VisitorConfig',
+    'feedback.apps.FeedbackConfig',
     'social_core',
     'social_django',
     'ckeditor',
