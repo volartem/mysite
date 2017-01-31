@@ -11,7 +11,7 @@
                 Вы можете оставить свой отзыв или свое пожелания относительно данного сайта.
                 Заполните ниже форму.
             </p>
-            <form action="." method="get" method="POST" action=".">{% csrf_token %}
+            <form  name="form"  method="post" action="{% url 'contact' %}">{% csrf_token %}
                 <div class="form-group">
                     {{ form.theme }}
                 </div>
@@ -21,7 +21,7 @@
                 <div class="form-group">
                     {{ form.message }}
                 </div>
-                <input type="submit" class="btn">
+                <input type="submit" class="btn btn-primary pull-left" value="Отправить">
             </form>
         </div>
 
