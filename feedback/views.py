@@ -4,7 +4,7 @@ from .models import Feedback
 from .forms import FeedbackForm
 from django.views.generic.edit import CreateView
 from django.contrib import messages
-from django.core.mail import send_mail
+from django.core.mail import mail_admins
 from django.conf import settings
 
 
@@ -18,5 +18,5 @@ class AboutView(CreateView):
         response = super().form_valid(form)
         messages.success(self.request,
                          'Ваш отзыв отправлен!', extra_tags='success')
-        # send_mail(self.object.theme, self.object.message, self.object.from_email, settings.ADMINS)
+        mail_admins(self.object.theme, self.object.message, self.object.from_email)
         return response

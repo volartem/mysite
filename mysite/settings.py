@@ -20,7 +20,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'f64w*hdd$i_=i^7q6idbgse&^=h^h156l7a7a(%th7uyv7#wqm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -43,7 +42,7 @@ INSTALLED_APPS = [
     'social_core',
     'social_django',
     'ckeditor',
-    'ckeditor_uploader'
+    'ckeditor_uploader',
 ]
 
 AUTHENTICATION_BACKENDS = (
