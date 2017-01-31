@@ -5,7 +5,6 @@ from .forms import FeedbackForm
 from django.views.generic.edit import CreateView
 from django.contrib import messages
 from django.core.mail import mail_admins
-from django.conf import settings
 
 
 class AboutView(CreateView):
