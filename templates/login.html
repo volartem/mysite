@@ -10,8 +10,7 @@
             <h4>Войдите через социальные аккаунты:</h4>
             <p><a href="{% url 'social:begin' 'facebook' %}"><b> Facebook</b></a></p>
             <p><a href="{% url 'social:begin' 'github' %}"><b> GitHub</b></a></p>
-            <!-- Google API works with domain names, after registration domain uncomment -->
-{#            <p><a href="{% url 'social:begin' 'google-oauth2' %}"><b> Google</b></a></p>#}
+            <p><a href="{% url 'social:begin' 'google-oauth2' %}"><b> Google</b></a></p>
         </div>
     </div>
 {% endblock %}

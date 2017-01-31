@@ -10,32 +10,33 @@
                 <a href="{% url 'note' note.id %}"><b>Читать полностью</b></a>
             </div>
         {% endfor %}
+        {% if notes.paginator.count > 5 %}
+            <div class="index">
+                <ul class="pagination pagin">
 
-        <div class="index">
-            <ul class="pagination pagin">
-
-                {% if notes.has_previous %}
-                    <li><a href="?page={{ notes.previous_page_number }}"><< previous</a></li>
-                {% else %}
-                    <li><a href="?page={{ notes.number }}"><< previous</a></li>
-                {% endif %}
-
-                {% for page in notes.paginator.page_range %}
-                    {% if page == notes.number %}
-                        <li class="active"><a href="">{{ page }}<span class="sr-only"></span></a></li>
+                    {% if notes.has_previous %}
+                        <li><a href="?page={{ notes.previous_page_number }}"><< previous</a></li>
                     {% else %}
-                        <li><a href="?page={{ page }}">{{ page }}<span class="sr-only"></span></a></li>
+                        <li><a href="?page={{ notes.number }}"><< previous</a></li>
                     {% endif %}
-                {% endfor %}
 
-                {% if notes.has_next %}
-                    <li><a href="?page={{ notes.next_page_number }}">next >></a></li>
-                {% else %}
-                    <li><a href="?page={{ notes.number }}">next >></a></li>
-                {% endif %}
+                    {% for page in notes.paginator.page_range %}
+                        {% if page == notes.number %}
+                            <li class="active"><a href="">{{ page }}<span class="sr-only"></span></a></li>
+                        {% else %}
+                            <li><a href="?page={{ page }}">{{ page }}<span class="sr-only"></span></a></li>
+                        {% endif %}
+                    {% endfor %}
 
-            </ul>
-        </div>
+                    {% if notes.has_next %}
+                        <li><a href="?page={{ notes.next_page_number }}">next >></a></li>
+                    {% else %}
+                        <li><a href="?page={{ notes.number }}">next >></a></li>
+                    {% endif %}
+
+                </ul>
+            </div>
+        {% endif %}
     </div>
 
 {% endblock %}
