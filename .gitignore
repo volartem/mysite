@@ -4,6 +4,5 @@ db.sqlite3
 *.pyo
 *~
 .idea/
-    __pycache__
 __pycache__
 *.log

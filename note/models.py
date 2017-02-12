@@ -22,3 +22,14 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Something(models.Model):
+    method = models.CharField(max_length=7)
+    path = models.CharField('Path', max_length=255)
+    date = models.DateTimeField(auto_now_add=True)
+    status_code = models.IntegerField('Status code')
+    ip = models.GenericIPAddressField()
+
+    def __str__(self):
+        return '%s %s' % (self.method, self.ip)

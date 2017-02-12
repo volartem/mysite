@@ -20,8 +20,6 @@ from django.conf.urls.static import static
 from mysite import settings
 
 
-
-
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='index'),
@@ -35,4 +33,3 @@ urlpatterns = [
     url(r'^accounts/profile/$', views.profile, name='profile'),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
