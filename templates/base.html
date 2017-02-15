@@ -2,7 +2,7 @@
 {% load static %}
 <html>
 <head>
-    <title>Django/Bootstrap</title>
+    <title>{% block title %}{% endblock %}</title>
     <meta charset="utf-8">
     <link href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABILAAASCwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKSnHIyQku6wgILHhLS28n9HR0kxHR8KIJia8pzc3sz8AAAAAAAAAAAAAAAAAAAAAiYnXmZmZ272bm9nBSUnAykFBvPclJbP/ISGt/y0tsv9eXl//Skpy/R0dsP81Nbu/UVH/AAAAAAAAAAAAAAD4AsPD5+6vr7H/goKD/zk5o/9NTbj/JSWx/yEhq/8tLa//UFBR/lFRUv8gIJv+LS2z/jMzwzYAAAAAAAAAAAcHxhDY2Oz9uLi6/6Skpf8zM6f/Rkav/yIirv8fH6n/LS2u/khISf1ISEj/NjZv/ioqsP+OjtaqAAAAAAAAAAAvL8Ar7Ozz/7W1tv+pqar/Kiql/zo6pP8NDaT/BASd/xAQof5CQkT8QUFB/0FBRv8SEpv/cXHH/IqK4CIAAAAAZ2fNSPb29/+hoaP/m5uc/yEhn/8nJ5n/AgKd/wEBmv8LC53+OztA/jw8PP8+Pj7/ICBw/y0tq/+Xl9iNAAAAAIqK02Xx8fP/qKio/6Wlp/8aGpr/GBiT/wUFm/8CApn/Cwuc/zg4Pf83Nzf/Ojo6/zY2R/8EBJb/GBih7gAAug2amtiB7e3v/7S0tf+oqLH/ExOW/xQUlP8GBpr/AwOX/wsLmv8zMzz/NjY2/zY2OP83Nzf/Ghp5/wAAk/8AAJxmpKTant7e4f+Wlpb/hoaX/xgYmP8XF5f/BweX/wQElv8MDJf/MDBE/zIyN/8xMTz/NTU1/y4uTf8CApL/BQWO2K+v3rvf3+L/qKiq/4qKpf8jI57/GRmZ/wUFlP8DA5P/DAyV/y4uVf8sLEH/LCxL/zIyNv8zM0D/GRmQ+wMDmYWqqtnYzs7T/5mZmv96epn/EBCW/wkJk/8aGpv/BweT/wsLlP8pKXL/Li5v/ysrhf85OYD2OTmYpEBAly0AAAAAWlq4u3p6wdB+fsTXdXW+xyIimbk5OZzOPDyN3k1NocUsLIq5LS14mzg4hHQ4OG9LSkpQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAP//AAD4BwAAgAMAAAADAAAAAwAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAHAAD//wAA//8AAA=="
           rel="icon" type="image/x-icon">
@@ -23,7 +23,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Blog notes</a>
+            <a class="navbar-brand" href="/">My blog notes</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">

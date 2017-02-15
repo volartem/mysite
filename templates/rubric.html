@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 
+{% block title %}{{ notes.0.rubric }} rubric{% endblock %}
+
+
 {% block content %}
     <div class="main col-sm-10">
         {% for note in notes %}
