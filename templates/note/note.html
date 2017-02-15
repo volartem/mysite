@@ -7,7 +7,8 @@
         <div class="container">
             <div class="rubric">
                 <p>
-                    Рубрика: <a href="{% url 'rubric' note.rubric %}">{{ note.rubric }}</a>  {{ note.date_create }}
+                    <b>Дата: {{ note.date_create|date:"d.m.Y" }}</b>;
+                    <b>Рубрика: <a href="{% url 'rubric' note.rubric %}">{{ note.rubric }}</a></b>;
                 </p>
             </div>
             <h3>{{ note.title }}</h3>
@@ -24,14 +25,14 @@
                     <div class="form-group">
                         <textarea required name="text" class="form-control" placeholder="Text"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-success pull-left" >Отправить</button>
+                    <button type="submit" class="btn btn-success pull-left">Отправить</button>
                 </form>
             </div>
         {% else %}
 
-                <div class="alert alert-info alert-dismissible " role="alert">
-                    <p>Чтобы оставить комментарий к записе, залогиньтесь</p>
-                </div>
+            <div class="alert alert-info alert-dismissible " role="alert">
+                <p>Чтобы оставить комментарий к записе, залогиньтесь</p>
+            </div>
 
         {% endif %}
         {% for coment in note.comments.all %}

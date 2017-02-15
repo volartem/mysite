@@ -5,7 +5,6 @@ from django.contrib.auth import logout
 from django.contrib import messages
 
 
-
 def index(request):
     notes = Note.objects.all().order_by('id').reverse()
     paginator = Paginator(notes, 5)
@@ -22,6 +21,7 @@ def index(request):
 
     return render(request, 'index.html', {'notes': pagin_notes})
 
+
 def rubric(request, pk):
     notes = Note.objects.filter(rubric=pk)
     paginator = Paginator(notes, 5)
@@ -36,6 +36,7 @@ def rubric(request, pk):
         # If page is out of range (e.g. 9999), deliver last page of results.
         pagin_notes = paginator.page(paginator.num_pages)
     return render(request, 'rubric.html', {'notes': pagin_notes})
+
 
 def contact(request):
     return render(request, 'contact.html')
