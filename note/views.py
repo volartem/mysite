@@ -1,12 +1,22 @@
 from django.shortcuts import render, redirect
-from .models import Note
+from .models import Note, Comment
 from .forms import CommentModelForm
 from django.contrib import messages
+from django.http import JsonResponse
+import json
+from django.core import serializers
 
 
 def note_detail(request, pk):
     note = Note.objects.get(id=pk)
     return render(request, 'note/note.html', {'note': note})
+
+
+def note_comments(request, pk):
+    comments = Comment.objects.filter(note_id=pk).order_by('-date_create')
+    dict_comments = [obj.as_dict() for obj in comments]
+    # dict_comments = serializers.serialize('json', comments)
+    return JsonResponse(json.dumps(dict_comments), safe=False)
 
 
 def add_comment(request, pk):

@@ -1,12 +1,27 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+
+{% block ang %}ng-app="App"{% endblock %}
+
+
 
 {% block title %}{{ note.title }}{% endblock %}
 
 
+{% block extrahead %}
+
+{#    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>#}
+    <script type="text/javascript" src="{% static 'js/lib/angular.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/lib/angular-resource.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/ang_script.js' %}"></script>
+{% endblock %}
+
+
 {% block content %}
 
-    <div class="main col-sm-10">
+    <div class="main col-sm-10" ng-controller="mainCtrl">
         <div class="container">
             <div class="rubric">
                 <p>
@@ -38,13 +53,17 @@
             </div>
 
         {% endif %}
-        {% for coment in note.comments.all %}
-            <div class="container">
-                <p><strong>{{ coment.owner.username|capfirst }}</strong> оставил комментарий</p>
-                <h4>{{ coment.title }}</h4>
-                {{ coment.text }}
-            </div>
-        {% endfor %}
+    {$ a $}<br>
+
+    <div ng-repeat="obj in comments track by $index" >
+        <div class="container" >
+            <h4>{$ obj.title $}</h4>
+            <p>{$ obj.text $}</p>
+            <p>{$ obj.date_create $}</p>
+        </div>
+    </div>
+    <div ng-controller="defaultCtrl"></div>
+
     </div>
 
 {% endblock %}

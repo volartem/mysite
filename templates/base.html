@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-<html>
+<html {% block ang %}{% endblock %}>
 <head>
     <title>{% block title %}{% endblock %}</title>
     <meta charset="utf-8">
@@ -13,6 +13,7 @@
     <!-- personal static -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+    {% block extrahead %}{% endblock %}
 </head>
 <body>
 <nav class="navbar navbar-inverse">
