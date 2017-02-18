@@ -5,6 +5,8 @@ from django.contrib import messages
 from django.http import JsonResponse
 import json
 from django.core import serializers
+from .serializers import CommentSerializer
+from rest_framework import generics
 
 
 def note_detail(request, pk):
@@ -14,9 +16,9 @@ def note_detail(request, pk):
 
 def note_comments(request, pk):
     comments = Comment.objects.filter(note_id=pk).order_by('-date_create')
-    dict_comments = [obj.as_dict() for obj in comments]
-    # dict_comments = serializers.serialize('json', comments)
-    return JsonResponse(json.dumps(dict_comments), safe=False)
+    # dict_comments = [obj.as_dict() for obj in comments]
+    dict_comments = serializers.serialize('json', comments)
+    return JsonResponse(dict_comments, safe=False)
 
 
 def add_comment(request, pk):
@@ -31,3 +33,14 @@ def add_comment(request, pk):
             return redirect('note', pk)
 
 
+class CommentList(generics.ListAPIView):
+    serializer_class = CommentSerializer
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the comments
+        for the current note.
+        """
+        pk = self.kwargs['pk']
+        afdf = Comment.objects.filter(note_id=pk).order_by('-date_create')
+        return afdf

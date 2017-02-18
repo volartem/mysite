@@ -15,7 +15,7 @@
 {#    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>#}
     <script type="text/javascript" src="{% static 'js/lib/angular.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/lib/angular-resource.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/ang_script.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
 {% endblock %}
 
 
@@ -53,17 +53,21 @@
             </div>
 
         {% endif %}
-    {$ a $}<br>
 
+    {$ a $}<br>
     <div ng-repeat="obj in comments track by $index" >
         <div class="container" >
             <h4>{$ obj.title $}</h4>
             <p>{$ obj.text $}</p>
-            <p>{$ obj.date_create $}</p>
+            <p>{$ obj.date_create | date:'yyyy-MM-dd HH:mm' $}</p>
+
         </div>
     </div>
+    <hr>
     <div ng-controller="defaultCtrl"></div>
-
+        <div class="container" >
+            {$ items $}
+        </div>
     </div>
 
 {% endblock %}
