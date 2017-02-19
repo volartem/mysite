@@ -8,7 +8,9 @@ class NoteSerializer(serializers.ModelSerializer):
         exclude = []
 
 
-class CommentSerializer(serializers.ModelSerializer):
+class CommentSerializer(serializers.HyperlinkedModelSerializer):
+    owner = serializers.SlugRelatedField(slug_field='username', read_only=True)
+
     class Meta:
         model = Comment
-        exclude = []
+        fields = ('owner', 'text', 'title', 'date_create')

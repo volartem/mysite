@@ -3,7 +3,6 @@ from .models import Note, Comment
 from .forms import CommentModelForm
 from django.contrib import messages
 from django.http import JsonResponse
-import json
 from django.core import serializers
 from .serializers import CommentSerializer
 from rest_framework import generics
@@ -33,7 +32,7 @@ def add_comment(request, pk):
             return redirect('note', pk)
 
 
-class CommentList(generics.ListAPIView):
+class CommentList(generics.ListCreateAPIView):
     serializer_class = CommentSerializer
 
     def get_queryset(self):
@@ -42,5 +41,12 @@ class CommentList(generics.ListAPIView):
         for the current note.
         """
         pk = self.kwargs['pk']
-        afdf = Comment.objects.filter(note_id=pk).order_by('-date_create')
-        return afdf
+        return Comment.objects.filter(note_id=pk).order_by('-date_create')
+
+    def perform_create(self, serializer):
+        try:
+            if self.request.user.is_authenticated():
+                note = self.kwargs.get('pk')
+                serializer.save(owner=self.request.user, note_id=int(note))
+        except TypeError:
+            raise
