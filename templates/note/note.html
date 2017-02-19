@@ -57,7 +57,7 @@
         {% endif %}
 
         <div>
-            <div ng-repeat="item in items track by $index">
+            <div ng-repeat="item in items | orderBy: '-date_create' track by $index">
                 <div class="container">
                     <p class="rubric">{$ item.date_create | date:'yyyy-MM-dd HH:mm' $} </p>
                     <p><strong>{$ item.owner $}</strong> оставил комментарий </p>
