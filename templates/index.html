@@ -1,47 +1,40 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 
 {% block title %}Home{% endblock %}
+
+
+{% block ang %}ng-app="App"{% endblock %}
 
 
 {% block index %}active{% endblock %}
 
 
+{% block extrahead %}
+
+    {#    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>#}
+    <script type="text/javascript" src="{% static 'js/lib/angular.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/lib/angular-resource.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/lib/angular-sanitize.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+{% endblock %}
+
+
+
 {% block content %}
-    <div class="main col-sm-10">
-        {% for note in notes %}
+    <div class="main col-sm-10" ng-controller="mainCtrl">
+        <div ng-repeat="item in notes | orderBy: '-date_create' track by $index">
             <div class="container">
-                <h3>{{ note.title }}</h3>
-                {{ note.text|truncatechars:250|safe }}
-                <a href="{% url 'note' note.id %}"><b>Читать полностью</b></a>
+                <p class="rubric">{$ item.date_create | date:'yyyy-MM-dd HH:mm' $} </p>
+                <p><strong>{$ item.title|capitalize $}</strong></p>
+                <div>
+                    <p ng-bind-html="item.text"></p>
+                    <input type="button" class="btn btn-success" value="Read" ng-click="testClick(item)">
+                </div>
             </div>
-        {% endfor %}
-        {% if notes.paginator.count > 5 %}
-            <div class="index">
-                <ul class="pagination pagin">
 
-                    {% if notes.has_previous %}
-                        <li><a href="?page={{ notes.previous_page_number }}"><< previous</a></li>
-                    {% else %}
-                        <li><a href="?page={{ notes.number }}"><< previous</a></li>
-                    {% endif %}
-
-                    {% for page in notes.paginator.page_range %}
-                        {% if page == notes.number %}
-                            <li class="active"><a href="">{{ page }}<span class="sr-only"></span></a></li>
-                        {% else %}
-                            <li><a href="?page={{ page }}">{{ page }}<span class="sr-only"></span></a></li>
-                        {% endif %}
-                    {% endfor %}
-
-                    {% if notes.has_next %}
-                        <li><a href="?page={{ notes.next_page_number }}">next >></a></li>
-                    {% else %}
-                        <li><a href="?page={{ notes.number }}">next >></a></li>
-                    {% endif %}
-
-                </ul>
-            </div>
-        {% endif %}
+        </div>
     </div>
 {% endblock %}
