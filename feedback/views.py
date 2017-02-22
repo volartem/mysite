@@ -1,4 +1,4 @@
-from django.shortcuts import render
+# -*- coding: utf-8 -*-
 from django.urls import reverse_lazy
 from .models import Feedback
 from .forms import FeedbackForm
@@ -14,7 +14,7 @@ class AboutView(CreateView):
     success_url = reverse_lazy('contact')
 
     def form_valid(self, form):
-        response = super().form_valid(form)
+        response = super(AboutView, self).form_valid(form)
         messages.success(self.request,
                          'Ваш отзыв отправлен!', extra_tags='success')
         mail_admins(self.object.theme, self.object.message, self.object.from_email)

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render, redirect
 from .models import Note
 from .forms import CommentModelForm
@@ -19,5 +20,3 @@ def add_comment(request, pk):
         else:
             messages.success(request, "Please try again.", extra_tags='info')
             return redirect('note', pk)
-
-
