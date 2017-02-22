@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from .models import Something
-from django.c
 
 
 class SimpleMiddleware(object):

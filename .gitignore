@@ -1,5 +1,4 @@
 local_settings.py
-db.sqlite3
 tests_settings.py
 *.pyc
 *.pyo
