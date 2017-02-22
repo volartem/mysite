@@ -2,7 +2,9 @@ appdirs==1.4.0
 defusedxml==0.4.1
 Django==1.10.5
 django-ckeditor==5.2.1
+django-generate-secret-key==1.0.2
 django-social-auth==0.7.28
+djangorestframework==3.5.4
 httplib2==0.9.2
 oauth2==1.9.0.post1
 oauthlib==2.0.1
