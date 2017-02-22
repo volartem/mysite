@@ -165,7 +165,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
 
 
-try:
-    from .local_settings import *
-except ImportError:
-    print("NO_LOCAL_SETTINGS_HERE")
+# try:
+#     from .local_settings import *
+# except ImportError:
+#     print("NO_LOCAL_SETTINGS_HERE")
+
+SECRET_KEY = os.environ['SECRET_KEY']
