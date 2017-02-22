@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from .models import Something
+from django.c
 
 
 class SimpleMiddleware(object):
@@ -19,13 +20,15 @@ class SimpleMiddleware(object):
             ip = x_forwarded_for.split(',')[-1].strip()
         else:
             ip = request.META.get('REMOTE_ADDR')
-        if not request.is_ajax():
-            current_request = Something(
-                method=request.method,
-                path=request.path,
-                status_code=response.status_code,
-                ip=ip
-            )
-            current_request.save()
-
+        try:
+            if not request.is_ajax():
+                current_request = Something(
+                    method=request.method,
+                    path=request.path,
+                    status_code=response.status_code,
+                    ip=ip
+                )
+                current_request.save()
+        except:
+            pass
         return response
