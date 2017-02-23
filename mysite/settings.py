@@ -25,14 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*', ]
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite3'
-    }
-}
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -171,4 +164,4 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
 
-SECRET_KEY = "os.environ['SECRET_KEY']"
+SECRET_KEY = os.environ['SECRET_KEY']
