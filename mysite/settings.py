@@ -157,11 +157,11 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'mysite', 'static'),
 ]
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 SECRET_KEY = os.environ['SECRET_KEY']
