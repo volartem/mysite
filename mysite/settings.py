@@ -165,12 +165,12 @@ LOGGING = {
     'loggers': {
         'bad_ip_log': {
             'handlers': ['middle_file'],
-            'level': 'WARNING',
+            'level': 'INFO',
         },
     },
     'handlers': {
         'middle_file': {
-            'level': 'WARNING',
+            'level': 'INFO',
             'class': 'logging.FileHandler',
             'filename': os.path.join(BASE_DIR, 'middleware_logger.log'),
             'formatter': 'bad_requests'

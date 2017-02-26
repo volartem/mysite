@@ -6,3 +6,4 @@ tests_settings.py
 .idea/
 __pycache__
 *.log
+db.sqlite3
