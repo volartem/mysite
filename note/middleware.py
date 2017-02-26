@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 from .models import Something
 from ipware.ip import get_ip
+import logging
+
+
+logger = logging.getLogger('bad_ip_log')
 
 
 class SimpleMiddleware(object):
@@ -16,14 +20,16 @@ class SimpleMiddleware(object):
 
     def process_response(self, request, response):
         ip_address = get_ip(request)
-
-        if not request.is_ajax():
-            current_request = Something(
-                method=request.method,
-                path=request.path,
-                status_code=response.status_code,
-                ip=ip_address
-            )
-            current_request.save()
+        if ip_address is not None:
+            if not request.is_ajax():
+                current_request = Something(
+                    method=request.method,
+                    path=request.path,
+                    status_code=response.status_code,
+                    ip=ip_address
+                )
+                current_request.save()
+        else:
+            logger.warning("%s ;; %s" % (request.path, request.META))
 
         return response
