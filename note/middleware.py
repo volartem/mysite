@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from .models import Something
+from ipware.ip import get_ip
 
 
 class SimpleMiddleware(object):
@@ -14,20 +15,15 @@ class SimpleMiddleware(object):
         return response
 
     def process_response(self, request, response):
-        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-        if x_forwarded_for:
-            ip = x_forwarded_for.split(',')[-1].strip()
-        else:
-            ip = request.META.get('REMOTE_ADDR')
-        try:
-            if not request.is_ajax():
-                current_request = Something(
-                    method=request.method,
-                    path=request.path,
-                    status_code=response.status_code,
-                    ip=ip
-                )
-                current_request.save()
-        except:
-            pass
+        ip_address = get_ip(request)
+
+        if not request.is_ajax():
+            current_request = Something(
+                method=request.method,
+                path=request.path,
+                status_code=response.status_code,
+                ip=ip_address
+            )
+            current_request.save()
+
         return response
