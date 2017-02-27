@@ -20,20 +20,18 @@ class SimpleMiddleware(object):
 
     def process_response(self, request, response):
         ip_address = get_ip(request)
-        logger.info("Before db %s :: %s :: %s :: %s" % (request.method,
-                                                        request.path,
-                                                        response.status_code,
-                                                        ip_address))
-        if ip_address is not None:
-            if not request.is_ajax():
-                current_request = Something(
-                    method=request.method,
-                    path=request.path,
-                    status_code=response.status_code,
-                    ip=ip_address
-                )
-                current_request.save()
-        else:
-            logger.warning("%s ;; %s" % (request.path, request.META))
-
+        try:
+            if ip_address is not None:
+                if not request.is_ajax():
+                    current_request = Something(
+                        method=request.method,
+                        path=request.path,
+                        status_code=response.status_code,
+                        ip=ip_address
+                    )
+                    current_request.save()
+            else:
+                logger.warning("%s ;; %s" % (request.path, request.META))
+        except:
+            pass
         return response
