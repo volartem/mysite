@@ -19,8 +19,8 @@ class SimpleMiddleware(object):
         return response
 
     def process_response(self, request, response):
-        ip_address = get_ip(request)
         try:
+            ip_address = get_ip(request)
             if ip_address is not None:
                 if not request.is_ajax():
                     current_request = Something(
