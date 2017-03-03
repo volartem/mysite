@@ -16,6 +16,38 @@
     <script type="text/javascript" src="{% static 'js/lib/angular.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/lib/angular-resource.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+    <script type="text/ng-template" id="Tree">
+        <div class="container">
+            <p class="rubric">{$ item.date_create | date:'yyyy-MM-dd HH:mm' $} </p>
+            <p><strong>{$ item.owner.username $}</strong> оставил комментарий </p>
+            <p class="code"><strong>{$ item.title $}</strong><br>{$ item.text $}</p>
+            {% if user.is_authenticated %}
+                <button type="submit" class="btn btn-success pull-left" ng-click="showBlock = ! showBlock">Ответить
+                </button>
+            {% endif %}
+            <div class="container" ng-show="showBlock">
+                <div>
+                    <div class="form-group">
+                        <input type="text" required ng-model="currentItem.title" class="form-control"
+                               placeholder="Title">
+                    </div>
+                    <div class="form-group">
+                        <textarea required ng-model="currentItem.text" class="form-control"
+                                  placeholder="Text"></textarea>
+                    </div>
+                    {% if user.is_authenticated %}
+                        <button type="submit" class="btn btn-success pull-left" ng-click="create(currentItem, item.id)">
+                            Отправить
+                        </button>
+                    {% endif %}
+                </div>
+            </div>
+            <div ng-if="item.child_set">
+                <div ng-repeat="item in item.child_set" ng-include="'Tree'"></div>
+            </div>
+
+        </div>
+    </script>
 {% endblock %}
 
 
@@ -32,37 +64,33 @@
             <h3>{{ note.title }}</h3>
             {{ note.text|safe }}
         </div>
-        {% if user.is_authenticated %}
-            <div class="container">
-                <p>Оставьте комментарий</p>
-                <div>
-                    <div class="form-group">
-                        <input type="text" required ng-model="currentItem.title" class="form-control"
-                               placeholder="Title">
-                    </div>
-                    <div class="form-group">
+
+        <div class="container">
+            {% if user.is_authenticated %}
+                <div class="container">
+                    <p>Добавить новый комментарий</p>
+                    <div>
+                        <div class="form-group">
+                            <input type="text" required ng-model="currentItem.title" class="form-control"
+                                   placeholder="Title">
+                        </div>
+                        <div class="form-group">
                         <textarea required ng-model="currentItem.text" class="form-control"
                                   placeholder="Text"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success pull-left" ng-click="create(currentItem)">Отправить
+                        </button>
                     </div>
-                    <button type="submit" class="btn btn-success pull-left" ng-click="create(currentItem)">Отправить
-                    </button>
                 </div>
-            </div>
-        {% else %}
+            {% else %}
 
-            <div class="alert alert-info alert-dismissible " role="alert">
-                <p>Чтобы оставить комментарий к записе, залогиньтесь</p>
-            </div>
-
-        {% endif %}
-
-        <div>
-            <div ng-repeat="item in items | orderBy: '-date_create' track by $index">
-                <div class="container">
-                    <p class="rubric">{$ item.date_create | date:'yyyy-MM-dd HH:mm' $} </p>
-                    <p><strong>{$ item.owner $}</strong> оставил комментарий </p>
-                    <p class="code"><strong>{$ item.title $}</strong><br>{$ item.text $}</p>
+                <div class="alert alert-info alert-dismissible " role="alert">
+                    <p>Чтобы оставить комментарий к записе, залогиньтесь</p>
                 </div>
+
+            {% endif %}
+            <div ng-repeat="item in items | orderBy: '-date_create' track by $index" ng-include="'Tree'">
+
             </div>
 
         </div>

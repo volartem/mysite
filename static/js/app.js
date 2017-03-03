@@ -8,8 +8,8 @@ app.config(['$resourceProvider', function ($resourceProvider) {
     $resourceProvider.defaults.stripTrailingSlashes = false;
 }]);
 app.config(['$httpProvider', function($httpProvider) {
-  $httpProvider.defaults.xsrfCookieName = 'csrftoken';
-  $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+    $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 }]);
 app.constant("baseUrl", "comments/");
 app.filter('capitalize', function() {  // filter capitalize for templates
@@ -27,9 +27,10 @@ app.controller("defaultCtrl", function ($scope, $http, $resource, baseUrl) {
     $scope.refresh();
 
     // создание нового коммента
-    $scope.create = function (item) {
+    $scope.create = function (item, parent) {
+        item.parent = parent;
         new $scope.itemsResource(item).$save().then(function (newItem) {
-            $scope.items.push(newItem);
+            $scope.refresh();
         });
     }
 });
