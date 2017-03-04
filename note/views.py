@@ -20,8 +20,11 @@ def note_comments(request, pk):
 
 
 class CommentViewSet(viewsets.ModelViewSet):
-    queryset = Comment.objects.all().filter(parent=None)
     serializer_class = CommentSerializer
+
+    def get_queryset(self):
+        obj = Comment.objects.all().filter(note_id=self.kwargs.get('pk')).filter(parent=None)
+        return obj
 
     @list_route()
     def roots(self, request):
