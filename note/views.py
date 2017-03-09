@@ -4,8 +4,7 @@ from django.http import JsonResponse
 from django.core import serializers
 from .serializers import CommentSerializer
 from rest_framework import viewsets
-from rest_framework.response import Response
-from rest_framework.decorators import list_route
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def note_detail(request, pk):
@@ -23,19 +22,29 @@ class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
 
     def get_queryset(self):
-        obj = Comment.objects.all().filter(note_id=self.kwargs.get('pk')).filter(parent=None)
-        return obj
-
-    @list_route()
-    def roots(self, request):
-        queryset = Comment.objects.filter(parent=None)
-        serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
+        pk = self.kwargs.get('pk')
+        queryset = Comment.objects.\
+            raw(
+            'SELECT * FROM note_comment '
+            'WHERE note_id = %s AND path && ARRAY[0] '
+            'ORDER BY path[:];' % pk)
+        return queryset
 
     def perform_create(self, serializer):
-        try:
-            if self.request.user.is_authenticated():
-                note = self.kwargs.get('pk')
-                serializer.save(owner=self.request.user, note_id=int(note))
-        except TypeError:
-            pass
+        if self.request.user.is_authenticated():
+            note = self.kwargs.get('pk')
+            try:
+                obj = self.request.data.get('parent')
+                parent_path = Comment.objects.get(id=obj).path
+                path = []
+                path.extend(parent_path)
+            except (KeyError, ObjectDoesNotExist):
+                path = [0]
+
+            obj = serializer.save(
+                owner=self.request.user,
+                note_id=int(note),
+                path=path
+            )
+            obj.path.append(obj.id)
+            obj.save()

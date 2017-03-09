@@ -162,7 +162,6 @@ textarea {
     border-radius: 4px;
     width: 100%;
     float: left;
-    /*opacity: 0.7;*/
 }
 .main{
     float: left;
@@ -173,4 +172,7 @@ textarea {
 }
 .im {
     opacity: 0.9;
+}
+.ng-cloak{
+    display: none;
 }
