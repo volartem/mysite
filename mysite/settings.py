@@ -158,7 +158,7 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'mysite/static'),
 ]
 
 STATIC_URL = '/static/'
