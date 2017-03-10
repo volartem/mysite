@@ -22,13 +22,16 @@ class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
 
     def get_queryset(self):
-        pk = self.kwargs.get('pk')
-        queryset = Comment.objects.\
-            raw(
-            'SELECT * FROM note_comment '
-            'WHERE note_id = %s AND path && ARRAY[0] '
-            'ORDER BY path[:];' % pk)
-        return queryset
+        try:
+            pk = int(self.kwargs.get('pk'))
+            queryset = Comment.objects.\
+                raw(
+                'SELECT * FROM note_comment '
+                'WHERE note_id = %s AND path && ARRAY[0] '
+                'ORDER BY path[:];', [pk])
+            return queryset
+        except (TypeError, ValueError):
+            pass
 
     def perform_create(self, serializer):
         if self.request.user.is_authenticated():
