@@ -26,9 +26,9 @@ class CommentViewSet(viewsets.ModelViewSet):
             pk = int(self.kwargs.get('pk'))
             queryset = Comment.objects.\
                 raw(
-                'SELECT * FROM note_comment '
-                'WHERE note_id = %s AND path && ARRAY[0] '
-                'ORDER BY path[:];', [pk])
+                'SELECT * FROM note_comment'
+                ' WHERE note_id = %s AND path && ARRAY[0] '
+                'ORDER BY path;', [pk])
             return queryset
         except (TypeError, ValueError):
             pass
