@@ -16,36 +16,6 @@
     <script type="text/javascript" src="{% static 'js/lib/angular.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/lib/angular-resource.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
-    <script type="text/ng-template" id="Tree">
-{#        <div>#}
-{#            <div ng-style="{ 'padding-left': item.path.length * 10 }">#}
-{#                <p class="rubric">{$ item.date_create | date:'yyyy-MM-dd HH:mm' $} </p>#}
-{#                <p class="code-featured"><strong>{$ item.owner.username $}</strong> прокомментировал </p>#}
-{#                <p class="code"><strong>{$ item.title $}</strong><br>{$ item.text $}</p>#}
-{#                <p><a ng-click="showBlock = ! showBlock" style="cursor: pointer;">Ответить#}
-{#                </a></p>#}
-{#            </div>#}
-{#            {% if user.is_authenticated %}#}
-{#                <div class="container" ng-show="showBlock">#}
-{#                    <div class="form-group">#}
-{#                        <input type="text" required ng-model="currentItem.title" class="form-control"#}
-{#                               placeholder="Title">#}
-{#                    </div>#}
-{#                    <div class="form-group">#}
-{#                                <textarea required ng-model="currentItem.text" class="form-control"#}
-{#                                          placeholder="Text"></textarea>#}
-{#                    </div>#}
-{#                    <a type="submit" class="pull-left" style="cursor: pointer;"#}
-{#                       ng-click="create(currentItem, item.id)">Отправить</a>#}
-{#                </div>#}
-{#            {% else %}#}
-{#                <div class="alert alert-success" ng-show="showBlock">#}
-{#                    <p>Чтобы ответить на комментарий, который оставил <strong>{$ item.owner.username $}</strong>, <a#}
-{#                            href="{% url 'login' %}" target="_blank">залогиньтесь</a></p>#}
-{#                </div>#}
-{#            {% endif %}#}
-{#        </div>#}
-    </script>
 {% endblock %}
 
 
@@ -92,16 +62,16 @@
                     <p>Чтобы отправить комментарий, <a href="{% url 'login' %}" target="_blank">залогиньтесь</a></p>
                 </div>
             </div>
-
-            <div ng-repeat="item in items track by $index">
-                <div ng-style="{ 'padding-left': item.path.length * 10 }">
-                    <div>
-                        <p class="rubric">{$ item.date_create | date:'yyyy-MM-dd HH:mm' $} </p>
-                        <p class="code-featured"><strong>{$ item.owner.username $}</strong> прокомментировал </p>
-                        <p class="code"><strong>{$ item.title $}</strong><br>{$ item.text $}</p>
-                        <p><a ng-click="showBlock = ! showBlock" style="cursor: pointer;">Ответить
-                        </a></p>
-                    </div>
+            <div ng-repeat="item in items track by $index" style="padding-left: 10px">
+                <div ng-style="{ 'padding-left': (item.path.length - 2) * 20 } ">
+                    <p class="rubric">{$ item.date_create | date:'yyyy-MM-dd HH:mm' $} </p>
+                    <p class="code-featured" ng-if="item.path.length > 2"><strong>{$ item.owner.username $}</strong>
+                        прокомментировал <strong>{$ items[$index -1].owner.username $}</strong></p>
+                    <p class="code-featured" ng-if="item.path.length == 2"><strong>{$ item.owner.username $}</strong>
+                        оставил комментарий к записе </p>
+                    <p class="code"><strong>{$ item.title $}</strong><br>{$ item.text $}</p>
+                    <p class="float-right"><a ng-click="showBlock = ! showBlock" style="cursor: pointer;">Ответить
+                    </a></p>
                     {% if user.is_authenticated %}
                         <div class="container" ng-show="showBlock">
                             <div class="form-group">
@@ -121,7 +91,7 @@
                                 <a href="{% url 'login' %}" target="_blank">залогиньтесь</a></p>
                         </div>
                     {% endif %}
-                <hr>
+                    <hr>
                 </div>
             </div>
 
