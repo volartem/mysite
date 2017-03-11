@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.contrib.postgres.fields import ArrayField
 
 
 class Note(models.Model):
@@ -19,6 +20,8 @@ class Comment(models.Model):
     text = models.TextField()
     date_create = models.DateTimeField(auto_now=True)
     owner = models.ForeignKey(User, related_name='User', null=True)
+    # moderate =models.BooleanField(default=False)
+    path = ArrayField(models.IntegerField(), null=True, blank=True)
 
     def __str__(self):
         return self.title

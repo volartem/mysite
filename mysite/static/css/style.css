@@ -99,8 +99,9 @@ input {
 }
 
 .container {
-    border: solid 5px rgba(100, 100, 100, 0.5);
-    border-radius: 5px;
+    border: 1px rgba(100, 100, 100, 0.2);
+    border-style: none none none solid;
+    /*border-radius: 1px;*/
     margin: 20px auto;
     padding: 10px;
     background: rgba(0, 1, 2, 0.5);
@@ -161,7 +162,6 @@ textarea {
     border-radius: 4px;
     width: 100%;
     float: left;
-    /*opacity: 0.7;*/
 }
 .main{
     float: left;
@@ -172,4 +172,7 @@ textarea {
 }
 .im {
     opacity: 0.9;
+}
+.ng-cloak{
+    display: none;
 }
