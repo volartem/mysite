@@ -33,6 +33,7 @@ class Something(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     status_code = models.IntegerField('Status code')
     ip = models.GenericIPAddressField()
+    refer = models.SlugField(max_length=255, default='not_refer', null=True)
 
     def __str__(self):
         return '%s %s' % (self.method, self.ip)
