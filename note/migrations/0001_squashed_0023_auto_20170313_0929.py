@@ -11,8 +11,6 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    replaces = [('note', '0001_initial'), ('note', '0002_commnet'), ('note', '0003_auto_20161231_1058'), ('note', '0004_auto_20170112_1017'), ('note', '0005_auto_20170112_1059'), ('note', '0006_auto_20170120_0602'), ('note', '0007_auto_20170126_0643'), ('note', '0008_auto_20170126_0645'), ('note', '0009_auto_20170126_0800'), ('note', '0010_note_rubric'), ('note', '0011_auto_20170129_0700'), ('note', '0012_something'), ('note', '0013_auto_20170212_1838'), ('note', '0014_comment_parent'), ('note', '0015_auto_20170308_1453'), ('note', '0016_auto_20170308_1526'), ('note', '0017_auto_20170308_1528'), ('note', '0018_auto_20170308_1529'), ('note', '0019_something_refer'), ('note', '0020_auto_20170313_0913'), ('note', '0021_auto_20170313_0915'), ('note', '0022_auto_20170313_0917'), ('note', '0023_auto_20170313_0929')]
-
     initial = True
 
     dependencies = [
