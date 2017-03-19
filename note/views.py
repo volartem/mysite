@@ -4,7 +4,6 @@ from django.http import JsonResponse
 from django.core import serializers
 from .serializers import CommentSerializer
 from rest_framework import viewsets
-from django.core.exceptions import ObjectDoesNotExist
 
 
 def note_detail(request, pk):
@@ -41,7 +40,7 @@ class CommentViewSet(viewsets.ModelViewSet):
                 parent_path = Comment.objects.get(id=obj).path
                 path = []
                 path.extend(parent_path)
-            except (KeyError, ObjectDoesNotExist):
+            except (KeyError, Comment.DoesNotExist):
                 path = [0]
 
             obj = serializer.save(

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block ang %}ng-app="Chat"{% endblock %}
+
+{% block chat %}active{% endblock %}
+
+
+{% block extrahead %}
+    <script type="text/javascript" src="{% static 'js/lib/angular.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/lib/angular-websocket.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/chat.js' %}"></script>
+{% endblock %}
+
+
+{% block title %}Chat{% endblock %}
+
+
+
+
+{% block live %}
+    <div class="container ng-cloak" ng-controller="SomeController">
+        Online
+        <ul ng-repeat="item in users[0].users">
+            <li>
+                {$ item.username $}
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="main col-sm-10 ng-cloak" ng-controller="SomeController">
+        <div class="chat_container">
+
+            <div id="subscribe"  ng-repeat="item in message_list[0] track by $index">
+                <div class="chat_message" ng-if="item.message">
+
+                    <div ><strong class="author_left">{$ item.author $}</strong> <i class="time_right">{$ item.date $}</i></div>
+                    <div class="chat_message_text">{$ item.message $} </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <form name="publish">
+                <textarea class="chat_input" name="message" ng-model="text"></textarea>
+                <input type="submit" class="chat_submit" value="Отправить" ng-click="sends(text)">
+            </form>
+        </div>
+
+    </div>
+
+{% endblock %}

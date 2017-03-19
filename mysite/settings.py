@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'rest_framework',
+    'chat',
+    'channels',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -165,8 +167,19 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'asgi_redis.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('localhost', 6379)],
+        },
+        'ROUTING': 'mysite.routing.channel_routing',
+    }
+}
 
 try:
     from .local_settings import *
 except ImportError:
     print("NO_LOCAL_SETTINGS_HERE")
+
+
