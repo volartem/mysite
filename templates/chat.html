@@ -22,8 +22,8 @@
 {% block live %}
     <div class="container ng-cloak" ng-controller="SomeController">
         Online
-        <ul ng-repeat="item in users[0].users">
-            <li>
+        <ul  ng-repeat="item in users">
+            <li ng-if="item.username">
                 {$ item.username $}
             </li>
         </ul>

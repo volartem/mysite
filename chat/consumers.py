@@ -2,6 +2,8 @@ from channels import Group
 import json
 from channels.auth import channel_session_user, channel_session_user_from_http
 from .models import Message, LoggedInUser
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
 
 
 @channel_session_user_from_http
@@ -24,7 +26,6 @@ def ws_connect(message):
 
             })
             Group('chat').send({'text': text})
-
 
 
 @channel_session_user
@@ -52,20 +53,23 @@ def ws_disconnect(message):
 
 
 def users_connect(message):
-    users = LoggedInUser.objects.all()
-    dict_users = [obj.as_dict() for obj in users]
-    print('users', dict_users)
     message.reply_channel.send({"accept": True})
     Group('users').add(message.reply_channel)
-    Group('users').send({
-        'text': json.dumps({
-            'users': dict_users
-        })
-    })
+    filter_users()
 
 
-def users_message(message):
-    users = LoggedInUser.objects.all()
+def users_message():
+    filter_users()
+
+
+@receiver(post_save, sender=LoggedInUser)
+@receiver(post_delete, sender=LoggedInUser)
+def send_update(sender, **kwargs):
+    filter_users()
+
+
+def filter_users():
+    users = LoggedInUser.objects.filter(user__is_superuser=False)
     dict_users = [obj.as_dict() for obj in users]
     Group('users').send({
         'text': json.dumps({
