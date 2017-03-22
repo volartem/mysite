@@ -14,7 +14,10 @@ class SimpleMiddleware(object):
 
     def process_response(self, request, response):
         x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-        refer = request.META.get('HTTP_REFERER')
+        try:
+            refer = request.META.get('HTTP_REFERER')[:255]
+        except TypeError:
+            refer = 'not_refer'
         if x_forwarded_for:
             ip = x_forwarded_for.split(',')[-1].strip()
         else:
@@ -25,7 +28,7 @@ class SimpleMiddleware(object):
                 path=request.path,
                 status_code=response.status_code,
                 ip=ip,
-                refer=refer or 'not_refer'
+                refer=refer
             )
             current_request.save()
 
