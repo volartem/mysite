@@ -126,7 +126,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Kiev'
 
 USE_I18N = True
 
@@ -164,6 +164,31 @@ STATICFILES_DIRS = [
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'loggers': {
+        'ip_logger': {
+            'handlers': ['middle_file'],
+            'level': 'INFO',
+        },
+    },
+    'handlers': {
+        'middle_file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'middleware_logger.log'),
+            'formatter': 'bad_requests'
+        },
+    },
+    'formatters': {
+        'bad_requests': {
+            'format': '%(levelname)s %(asctime)s %(message)s'
+        },
+    }
+}
 
 
 try:
