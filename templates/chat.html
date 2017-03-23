@@ -17,12 +17,10 @@
 {% block title %}Chat{% endblock %}
 
 
-
-
 {% block live %}
     <div class="container ng-cloak" ng-controller="SomeController">
         Online
-        <ul  ng-repeat="item in users">
+        <ul ng-repeat="item in users">
             <li ng-if="item.username">
                 {$ item.username $}
             </li>
@@ -33,20 +31,35 @@
     <div class="main col-sm-10 ng-cloak" ng-controller="SomeController">
         <div class="chat_container">
 
-            <div id="subscribe"  ng-repeat="item in message_list[0] track by $index">
+            <div id="subscribe" ng-repeat="item in message_list[0] track by $index">
                 <div class="chat_message" ng-if="item.message">
-
-                    <div ><strong class="author_left">{$ item.author $}</strong> <i class="time_right">{$ item.date $}</i></div>
-                    <div class="chat_message_text">{$ item.message $} </div>
-
+                    <div>
+                        <strong class="author_left">{$ item.author $}</strong> <i class="time_right">{$ item.date$}</i>
+                    </div>
+                    <div class="chat_message_text">
+                        {$ item.message $}
+                    </div>
                 </div>
             </div>
         </div>
         <div class="container">
             <form name="publish">
                 <textarea class="chat_input" name="message" ng-model="text"></textarea>
-                <input type="submit" class="chat_submit" value="Отправить" ng-click="sends(text)">
+                {% if user.is_authenticated %}
+                    <input type="submit" class="chat_submit" value="Отправить" ng-click="sends(text)">
+                {% else %}
+                    <a ng-click="show = !show" style="cursor: pointer;">Отправить</a>
+                {% endif %}
             </form>
+
+            <div ng-show="show">
+                <div class="alert alert-warning ">
+                    <p>Чтобы принять участие в чате <a href="{% url 'login' %}" target="_blank"> надо
+                        авторизоваться </a>
+                    </p>
+                </div>
+            </div>
+
         </div>
 
     </div>
