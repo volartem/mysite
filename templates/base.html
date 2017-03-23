@@ -28,6 +28,7 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="{% block index %}{% endblock %}"><a href="{% url 'index' %}">Home</a></li>
+                <li class="{% block chat %}{% endblock %}"><a href="{% url 'chat' %}">Chat</a></li>
                 <li class="{% block about %}{% endblock %}"><a href="{% url 'about' %}">About</a></li>
                 <li class="{% block contact %}{% endblock %}"><a href="{% url 'contact' %}">Contact</a></li>
             </ul>
@@ -75,7 +76,11 @@
                     <li><a href="/rubric/Linux/">Linux</a></li>
                 </ul>
         </div>
+
+        {% block live %}{% endblock %}
+
     </div>
+
 {% block content %}
 
 {% endblock %}

@@ -20,7 +20,7 @@ class Comment(models.Model):
     text = models.TextField()
     date_create = models.DateTimeField(auto_now=True)
     owner = models.ForeignKey(User, related_name='User', null=True)
-    # moderate =models.BooleanField(default=False)
+    # moderate = models.BooleanField(default=False)
     path = ArrayField(models.IntegerField(), null=True, blank=True)
 
     def __str__(self):
@@ -33,7 +33,7 @@ class Something(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     status_code = models.IntegerField('Status code')
     ip = models.GenericIPAddressField()
-    refer = models.SlugField(max_length=255, default='not_refer', null=True)
+    refer = models.SlugField(default='not_refer', null=True)
 
     def __str__(self):
         return '%s %s' % (self.method, self.ip)

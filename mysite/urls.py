@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^contact/', include('feedback.urls')),
     url(r'rubric/(?P<pk>\w+)/$', views.rubric, name='rubric'),
     url(r'^note/', include('note.urls')),
+    url(r'^chat/', include('chat.urls')),
     url(r'^login/$', views.login, name='login'),
     url(r'^logout/$', views.auth_logout, name='logout'),
     url(r'^social/', include('social_django.urls', namespace='social')),
