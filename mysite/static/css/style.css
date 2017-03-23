@@ -176,3 +176,6 @@ textarea {
 .ng-cloak{
     display: none;
 }
+.error_html{
+    text-align: center;
+}

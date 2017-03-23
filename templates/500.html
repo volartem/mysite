@@ -1,0 +1,18 @@
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}500{% endblock %}
+
+
+{% block content %}
+    <div class="main col-sm-10">
+    <div class="container error_html">
+            <h2>500</h2>
+        </div>
+        <div class="container error_html">
+            <img src="{% static 'images/spidertocat.png' %}" style="width: auto; height: 300px;">
+        </div>
+    </div>
+{% endblock %}
