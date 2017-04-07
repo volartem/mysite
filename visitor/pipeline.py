@@ -48,6 +48,8 @@ def get_url(provider, response, id):
     elif provider == 'vk-oauth2':
         image_url = response['user_photo'] if response['user_photo'] != 'http://vk.com/images/camera_50.png' \
             else '/static/images/logo.png'
-    else:
+    elif provider == 'google-oauth2':
         image_url = response['image']['url']
+    else:
+        image_url = '/static/images/logo.png'
     return image_url
