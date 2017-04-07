@@ -58,5 +58,3 @@ def auth_logout(request):
     logout(request)
     messages.success(request, 'You are logout.', extra_tags='info')
     return redirect('index')
-
-
