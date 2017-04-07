@@ -55,7 +55,7 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.yandex.YandexOAuth2',
     'social_core.backends.twitter.TwitterOAuth',
-    'social_core.backends.yahoo.YahooOAuth2',
+    # 'social_core.backends.yahoo.YahooOAuth2',
     'social_core.backends.mailru.MailruOAuth2',
     'social_core.backends.vk.VKOAuth2',
 )
