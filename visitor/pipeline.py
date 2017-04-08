@@ -6,24 +6,26 @@ def save_user_data(backend, user, response, is_new=False, *args, **kwargs):
         Save in special table but important get correct url avatar 
     '''
 
-    id = response.get('id') or response['uid']
+    id = response.get('id') or response.get('uid') \
+         or response.get('data').get('id') or response.get('xoauth_yahoo_guid')
     if not is_new:
         auth_user = Visitor.objects.get(uid=id)
+        auth_user.access_token = response['access_token']
         old_url = get_url(backend.name, response, id)
         if old_url != auth_user.image_url:
             auth_user.image_url = get_url(backend.name, response, id)
-            auth_user.save()
+        auth_user.save()
     else:
+        user.uid = id
+        user.provider = backend.name
+        user.access_token = response['access_token']
+        user.image_url = get_url(user.provider, response, id)
         try:
-            user.uid = id
-            user.provider = backend.name
-            user.access_token = response['access_token']
-            user.image_url = get_url(user.provider, response, id)
-            user.username = '%s %s' % (response['first_name'], response['last_name']) or user.username
-            user.save()
-        except:
-            print('error_save')
-            pass
+            user.username = '%s %s' % (response['first_name'], response['last_name'])
+        except KeyError:
+            if backend.name == 'google-oauth2':
+                user.username = '%s %s' % (response['name']['givenName'], response['name']['familyName'])
+        user.save()
 
 
 def get_url(provider, response, id):
@@ -49,7 +51,9 @@ def get_url(provider, response, id):
         image_url = response['user_photo'] if response['user_photo'] != 'http://vk.com/images/camera_50.png' \
             else '/static/images/logo.png'
     elif provider == 'google-oauth2':
-        image_url = response['image']['url']
+        image_url = '%s0' % response['image']['url']
+    elif provider == 'instagram':
+        image_url = response['data']['profile_picture'] or '/static/images/logo.png'
     else:
         image_url = '/static/images/logo.png'
     return image_url
