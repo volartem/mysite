@@ -1,11 +1,15 @@
 from .models import Visitor
+import logging
+
+
+logger = logging.getLogger('pipeline')
 
 
 def save_user_data(backend, user, response, is_new=False, *args, **kwargs):
     '''
         Save in special table but important get correct url avatar 
     '''
-
+    logger.warning("%s ;;; %s" % (backend.name, response))
     id = response.get('id') or response.get('uid') \
          or response.get('data').get('id') or response.get('xoauth_yahoo_guid')
     if not is_new:

@@ -8,4 +8,3 @@ tests_settings.py
 __pycache__
 *.log
 media/
-middleware_logger.log
