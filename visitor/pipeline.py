@@ -29,6 +29,8 @@ def save_user_data(backend, user, response, is_new=False, *args, **kwargs):
         except KeyError:
             if backend.name == 'google-oauth2':
                 user.username = '%s %s' % (response['name']['givenName'], response['name']['familyName'])
+            elif backend.name == 'yahoo-oauth2':
+                user.username = response['nickname']
         user.save()
 
 
