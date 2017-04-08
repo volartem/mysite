@@ -1,11 +1,12 @@
 from .models import Visitor
+from django.core.mail import mail_admins
 
 
 def save_user_data(backend, user, response, is_new=False, *args, **kwargs):
     '''
         Save in special table but important get correct url avatar 
     '''
-
+    mail_admins('response_for_yahoo', response, 'yahoo@com')
     id = response.get('id') or response.get('uid') \
          or response.get('data').get('id') or response.get('xoauth_yahoo_guid')
     if not is_new:
