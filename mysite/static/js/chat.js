@@ -4,7 +4,7 @@ appChat.config(['$interpolateProvider', function ($interpolateProvider) {
     $interpolateProvider.endSymbol('$}');
 }]);
 appChat.factory('Messages', function ($websocket) {
-    var dataStream = $websocket('ws://' + window.location.host + '/chat/');
+    var dataStream = $websocket('wss://' + window.location.host + '/chat/');
     var collection = [];
 
     dataStream.onMessage(function (message) {
@@ -28,7 +28,7 @@ appChat.factory('Messages', function ($websocket) {
 });
 
 appChat.controller('SomeController', function ($scope, Messages) {
-    var dataStream = new WebSocket('ws://' + window.location.host + '/users/');
+    var dataStream = new WebSocket('wss://' + window.location.host + '/users/');
 
     dataStream.onmessage = function (event) {
         $scope.users = JSON.parse(event.data).users;
