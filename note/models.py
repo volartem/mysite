@@ -13,6 +13,9 @@ class Note(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return "/note/%s/" % self.id
+
 
 class Comment(models.Model):
     note = models.ForeignKey(Note, related_name='comments')

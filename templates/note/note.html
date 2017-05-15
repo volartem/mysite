@@ -59,8 +59,9 @@
             </div>
 
             <div ng-show="show">
-                <div class="alert alert-success ">
-                    <p>Чтобы отправить комментарий, <a href="{% url 'login' %}" target="_blank">залогиньтесь</a></p>
+                <div class="alert alert-danger ">
+                    <p>Чтобы отправить комментарий, <a href="{% url 'login' %}" target="_blank">необходимо
+                        авторизоваться</a></p>
                 </div>
             </div>
             <div ng-repeat="item in items track by $index" style="padding-left: 10px">
@@ -87,9 +88,9 @@
                                ng-click="create(currentItem, item.id)">Отправить</a>
                         </div>
                     {% else %}
-                        <div class="alert alert-success" ng-show="showBlock">
+                        <div class="alert alert-danger" ng-show="showBlock">
                             <p>Чтобы ответить на комментарий, который оставил <strong>{$ item.owner.username $}</strong>,
-                                <a href="{% url 'login' %}" target="_blank">залогиньтесь</a></p>
+                                <a href="{% url 'login' %}" target="_blank"> необходимо авторизоваться</a></p>
                         </div>
                     {% endif %}
                     <hr>

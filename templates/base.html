@@ -78,6 +78,12 @@
         </div>
 
         {% block live %}{% endblock %}
+        <div class="container">
+                <ul class="nav nav-stacked">
+                    <li><a href="{% url 'sitemap' %}" target="_blank"><small>sitemap</small></a></li>
+                    <li><a href="{% url 'rss' %}" target="_blank"><small>RSS</small></a></li>
+                </ul>
+        </div>
 
     </div>
 

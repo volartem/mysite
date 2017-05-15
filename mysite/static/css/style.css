@@ -253,3 +253,6 @@ textarea {
     display: inline-block;
 
 }
+.alert-danger, .alert-success{
+    margin-top: 10px;
+}

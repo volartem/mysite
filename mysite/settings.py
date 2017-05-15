@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
     'note.apps.NoteConfig',
     'visitor.apps.VisitorConfig',
     'feedback.apps.FeedbackConfig',

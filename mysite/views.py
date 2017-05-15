@@ -3,6 +3,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from note.models import Note
 from django.contrib.auth import logout
 from django.contrib import messages
+from django.contrib.sitemaps.views import sitemap
+from django.contrib.sitemaps import GenericSitemap
+from django.contrib.syndication.views import Feed
 
 
 def index(request):
@@ -58,3 +61,30 @@ def auth_logout(request):
     logout(request)
     messages.success(request, 'You are logout.', extra_tags='info')
     return redirect('index')
+
+
+def site_map(request):
+    posts = {
+        'queryset': Note.objects.all(),
+        'date_field': 'date_create',
+    }
+    site = {
+        'notes': GenericSitemap(posts),
+    }
+    return sitemap(request, sitemaps=site)
+
+
+class SiteFeed(Feed):
+    title = u"myblognotes.ru: Краткие записи при работе с Python, Django, Linux, базами данных " \
+            u"и прочие полезности в мире web(а)..."
+    link = "/"
+    description = u"Заходите, читайте и находите полезное для себя на данном ресурсе"
+
+    def items(self):
+        return Note.objects.order_by('-date_create')[:10]
+
+    def item_title(self, item):
+        return item.title
+
+    def item_description(self, item):
+        return item.text[0:200] + ""

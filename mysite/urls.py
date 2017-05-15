@@ -33,4 +33,6 @@ urlpatterns = [
     url(r'^social/', include('social_django.urls', namespace='social')),
     url(r'^accounts/profile/$', views.profile, name='profile'),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    url(r'^sitemap\.xml$', views.site_map, name='sitemap'),
+    url(r'^feed\.rss$', views.SiteFeed(), name='rss'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
