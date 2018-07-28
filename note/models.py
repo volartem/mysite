@@ -18,11 +18,11 @@ class Note(models.Model):
 
 
 class Comment(models.Model):
-    note = models.ForeignKey(Note, related_name='comments')
+    note = models.ForeignKey(Note, related_name='comments', on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     text = models.TextField()
     date_create = models.DateTimeField(auto_now=True)
-    owner = models.ForeignKey(User, related_name='User', null=True)
+    owner = models.ForeignKey(User, related_name='User', null=True, on_delete=models.CASCADE)
     # moderate = models.BooleanField(default=False)
     path = ArrayField(models.IntegerField(), null=True, blank=True)
 
