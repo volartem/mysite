@@ -43,8 +43,8 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'rest_framework',
-    'chat',
-    'channels',
+    # 'chat',
+    # 'channels',
 ]
 
 AUTHENTICATION_BACKENDS = (
