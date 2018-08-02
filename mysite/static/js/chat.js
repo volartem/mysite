@@ -4,23 +4,23 @@ appChat.config(['$interpolateProvider', function ($interpolateProvider) {
     $interpolateProvider.endSymbol('$}');
 }]);
 appChat.factory('Messages', function ($websocket) {
-    var dataStream = $websocket('wss://' + window.location.host + '/chat/');
+    var dataStream = $websocket('wss://' + window.location.host + '/ws/chat/');
     var collection = [];
 
     dataStream.onMessage(function (message) {
         if (collection.length == 0) {
-            collection.push(JSON.parse(message.data).messages);
+            let response = JSON.parse(message.data);
+            collection.push(response.messages);
         } else {
-            collection[0].push(JSON.parse(message.data));
+            collection[0].push(JSON.parse(message.data).messages);
         }
-
     });
 
     var methods = {
         collection: collection,
 
         get: function (val) {
-            dataStream.send(val);
+            dataStream.send(JSON.stringify({message: val}));
         }
     };
 
@@ -28,7 +28,7 @@ appChat.factory('Messages', function ($websocket) {
 });
 
 appChat.controller('SomeController', function ($scope, Messages) {
-    var dataStream = new WebSocket('wss://' + window.location.host + '/users/');
+    var dataStream = new WebSocket('wss://' + window.location.host + '/ws/users/');
 
     dataStream.onmessage = function (event) {
         $scope.users = JSON.parse(event.data).users;
