@@ -192,13 +192,13 @@ LOGGING = {
         'middle_file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'middleware_logger.log'),
+            'filename': os.path.join(BASE_DIR, 'logs/middleware_logger.log'),
             'formatter': 'bad_requests'
         },
         'pipeline_response': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'pipeline_response.log'),
+            'filename': os.path.join(BASE_DIR, 'logs/pipeline_response.log'),
             'formatter': 'bad_requests'
         }
     },
