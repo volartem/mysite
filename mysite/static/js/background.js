@@ -10,15 +10,15 @@ $(function(){
 
     $('#particles').particleground({
         minSpeedX: 0.1,
-        maxSpeedX: 1.0,
+        maxSpeedX: 0.1,
         minSpeedY: 0.1,
-        maxSpeedY: 1.0,
+        maxSpeedY: 0.1,
         directionX: 'center', // 'center', 'left' or 'right'. 'center' = dots bounce off edges
         directionY: 'center', // 'center', 'up' or 'down'. 'center' = dots bounce off edges
         density: 7000, // How many particles will be generated: one particle every n pixels
         dotColor: '#eee',
         lineColor: '#eee',
-        particleRadius: 5, // Dot size
+        particleRadius: 4, // Dot size
         lineWidth: 0.2,
         curvedLines: true,
         proximity: 100, // How close two dots need to be before they join
