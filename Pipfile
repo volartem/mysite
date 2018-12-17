@@ -12,9 +12,9 @@ channels = "==2.1.2"
 channels-redis = "==2.2.1"
 "psycopg2" = "==2.7.5"
 pillow = "==5.2.0"
-gunicorn = "*"
+
 
 [dev-packages]
 
 [requires]
-python_version = "3.6"
+python_version = "3.7"

@@ -8,3 +8,6 @@ tests_settings.py
 __pycache__
 *.log
 media/
+logs/
+.env
+staticfiles

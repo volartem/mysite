@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+
+  db:
+    image: postgres
+    volumes:
+      - ../storage/mysite/postgres:/var/lib/postgresql/data
+      - ../storage/mysite/for_dump:/dump
+    restart: always
+    env_file:
+      - .env
+
+  redis:
+    image: redis
+    volumes:
+      - ../storage/mysite/redis:/data
+
+  web:
+    build: .
+    command: pipenv run daphne mysite.asgi:application -p 8000 -b 0.0.0.0
+    links:
+      - db
+      - redis
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
