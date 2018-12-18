@@ -13,11 +13,13 @@ services:
 
   redis:
     image: redis
+    restart: always
     volumes:
       - ../storage/mysite/redis:/data
 
   web:
     build: .
+    restart: always
     command: pipenv run daphne mysite.asgi:application -p 8000 -b 0.0.0.0
     links:
       - db
