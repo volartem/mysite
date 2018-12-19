@@ -2,6 +2,23 @@ version: '3'
 
 services:
 
+  nginx:
+    image: nginx:1.14
+    restart: always
+    container_name: prod_nginx
+    volumes:
+      - /etc/letsencrypt/:/etc/letsencrypt/
+      - /etc/nginx/:/etc/nginx/
+      - /var/www/:/var/www/
+      - .:/code
+    ports:
+      - 80:80
+      - 443:443
+    links:
+      - web
+    depends_on:
+      - web
+
   db:
     image: postgres:9.5
     volumes:
