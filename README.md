@@ -5,11 +5,11 @@ It's a volume folders for running docker containers. In root directory must be `
 
 The application run with docker-compose.
 For local development:
-`docker-compose -f docker-compose.yml -f docker-compose-dev.yml up`
+`docker-compose -f dev.yml up`
 Then you must run all manage.py commands all you need inside container.
 
 For production:
-`docker-compose -f docker-compose.yml up -d`
-
+`docker-compose -f prod.yml up -d`
+As nginx is using as the docker container and the top of project infrastructure, you must have a working config(with ssl, ports and other values) on the host machine that is not representing here.
 In the project used pipenv - as a best dependency resolver and it truly easy to use.
-And it very simple to debug with pycharm as a remote debug.
+And it very simple to debug with pycharm with a remote debug.
