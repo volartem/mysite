@@ -16,6 +16,7 @@ services:
       - 443:443
     links:
       - web
+      - web-daphne
     depends_on:
       - web
 
@@ -37,7 +38,7 @@ services:
   web:
     build: .
     restart: always
-    command: pipenv run daphne mysite.asgi:application -p 8000 -b 0.0.0.0
+    command: pipenv run gunicorn --bind 0.0.0.0:8000 mysite.wsgi:application -w 2
     links:
       - db
       - redis
@@ -46,14 +47,16 @@ services:
     depends_on:
       - db
       - redis
-      - web-prepare
+      - web-daphne
 
-  web-prepare:
+  web-daphne:
     build: .
     volumes:
       - .:/code
-    command: bash -c "pipenv run python manage.py collectstatic --no-input && pipenv run python manage.py migrate"
+    command: bash -c "pipenv run python manage.py collectstatic --no-input && pipenv run python manage.py migrate && pipenv run daphne mysite.asgi:application -p 9000 -b 0.0.0.0"
     depends_on:
       - db
+      - redis
     links:
       - db
+      - redis

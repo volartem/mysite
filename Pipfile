@@ -12,6 +12,7 @@ channels = "==2.1.6"
 channels-redis = "==2.2.1"
 psycopg2 = "==2.7.6"
 pillow = "==5.2.0"
+gunicorn = "==19.9.0"
 
 
 [dev-packages]
