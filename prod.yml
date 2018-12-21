@@ -46,3 +46,14 @@ services:
     depends_on:
       - db
       - redis
+      - web-prepare
+
+  web-prepare:
+    build: .
+    volumes:
+      - .:/code
+    command: bash -c "pipenv run python manage.py collectstatic --no-input && pipenv run python manage.py migrate"
+    depends_on:
+      - db
+    links:
+      - db
