@@ -52,7 +52,9 @@ services:
       - web-daphne
 
   web-daphne:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.bjoern
     volumes:
       - .:/code
     command: bash -c "pipenv run python manage.py collectstatic --no-input && pipenv run python manage.py migrate && pipenv run daphne mysite.asgi:application -p 9000 -b 0.0.0.0"
