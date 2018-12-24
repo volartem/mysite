@@ -36,9 +36,11 @@ services:
       - ../storage/mysite/redis:/data
 
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.bjoern
     restart: always
-    command: pipenv run gunicorn --bind 0.0.0.0:8000 mysite.wsgi:application -w 2
+    command: pipenv run python -c "from mysite.wsgi import application; import bjoern; bjoern.run(application, '0.0.0.0', 8000)"
     links:
       - db
       - redis
