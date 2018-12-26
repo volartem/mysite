@@ -40,7 +40,7 @@ services:
       context: .
       dockerfile: Dockerfile.bjoern
     restart: always
-    command: pipenv run python -c "from mysite.wsgi import application; import bjoern; bjoern.run(application, '0.0.0.0', 8000)"
+    command: pipenv run python run_web_bjoern.py
     links:
       - db
       - redis
