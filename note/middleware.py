@@ -1,21 +1,18 @@
-import logging
-
-logger = logging.getLogger('ip_logger')
+from note.tasks import background_schedule_with_request
 
 
 class SimpleMiddleware(object):
     def __init__(self, get_response):
         self.get_response = get_response
-        # One-time configuration and initialization.
 
     def __call__(self, request):
         response = self.get_response(request)
         response = self.process_response(request, response)
-
         return response
 
     def process_response(self, request, response):
-        logger.warning("%s ;;; %s" % (request.path, get_info(request, response)))
+        obj = get_info(request, response)
+        background_schedule_with_request.delay(obj)
         return response
 
 
@@ -34,5 +31,6 @@ def get_info(request, response):
         'method': request.method,
         'ip': ip,
         'refer': refer,
+        'path': request.path
     }
     return obj

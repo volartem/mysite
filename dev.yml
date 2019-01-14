@@ -2,6 +2,30 @@ version: '3'
 
 services:
 
+  rabbit:
+    image: rabbitmq:3.7.8-management
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ../storage/mysite/rabbit:/var/lib/rabbitmq
+      - ../storage/mysite/rabbit/logs:/var/logs/rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"  # admin
+
+  web-celery:
+    build:
+      context: .
+      dockerfile: Dockerfile.bjoern
+    volumes:
+      - .:/code
+    command: bash -c "pipenv run celery -A mysite worker -l debug"
+    depends_on:
+      - rabbit
+    links:
+      - rabbit
+
   db:
     image: postgres:9.5
     volumes:
@@ -23,9 +47,12 @@ services:
       dockerfile: Dockerfile.bjoern
     restart: always
     command: pipenv run python manage.py runserver 0.0.0.0:8000
+    env_file:
+      - .env
     links:
       - db
       - redis
+      - rabbit
     volumes:
       - .:/code
     ports:
@@ -33,3 +60,4 @@ services:
     depends_on:
       - db
       - redis
+      - rabbit

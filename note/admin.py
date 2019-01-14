@@ -12,6 +12,7 @@ class SomethingAdmin(admin.ModelAdmin):
 
     format_date.short_description = 'Visited time'
 
+
 admin.site.register(Note)
 admin.site.register(Comment)
 admin.site.register(Something, SomethingAdmin)

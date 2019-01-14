@@ -13,6 +13,8 @@ channels-redis = "==2.2.1"
 psycopg2 = "==2.7.6"
 pillow = "==5.2.0"
 bjoern = "==2.2.3"
+celery = "==4.2.1"
+
 
 
 [dev-packages]

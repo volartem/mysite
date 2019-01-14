@@ -54,7 +54,6 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.yandex.YandexOAuth2',
     'social_core.backends.twitter.TwitterOAuth',
-    # 'social_core.backends.yahoo.YahooOAuth2',
     'social_core.backends.mailru.MailruOAuth2',
     'social_core.backends.vk.VKOAuth2',
     'social_core.backends.instagram.InstagramOAuth2',
@@ -208,6 +207,11 @@ LOGGING = {
         },
     }
 }
+
+CELERY_BROKER_URL = 'amqp://{user}:{password}@rabbit'.format(user=os.environ.get('RABBITMQ_DEFAULT_USER'),
+                                                             password=os.environ.get('RABBITMQ_DEFAULT_PASS'))
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
 
 try:
     from .local_settings import *
