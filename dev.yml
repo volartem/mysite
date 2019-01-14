@@ -20,7 +20,7 @@ services:
       dockerfile: Dockerfile.bjoern
     volumes:
       - .:/code
-    command: bash -c "pipenv run celery -A mysite worker -l debug"
+    command: bash -c "pipenv run celery -A mysite worker -l debug -f logs/celery.logs"
     depends_on:
       - rabbit
     links:
