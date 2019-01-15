@@ -1,4 +1,4 @@
-from note.tasks import background_schedule_with_request
+from note.tasks import background_logging
 
 
 class SimpleMiddleware(object):
@@ -12,7 +12,7 @@ class SimpleMiddleware(object):
 
     def process_response(self, request, response):
         obj = get_info(request, response)
-        background_schedule_with_request.delay(obj)
+        background_logging.delay(obj)
         return response
 
 

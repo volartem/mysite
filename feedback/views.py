@@ -3,8 +3,7 @@ from .models import Feedback
 from .forms import FeedbackForm
 from django.views.generic.edit import CreateView
 from django.contrib import messages
-from django.core.mail import send_mail
-from mysite.settings import ADMINS
+from .tasks import send_admin_feedback
 
 
 class AboutView(CreateView):
@@ -15,7 +14,9 @@ class AboutView(CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        messages.success(self.request,
-                         'Ваш отзыв отправлен!', extra_tags='success')
-        send_mail(self.object.theme, self.object.message, self.object.from_email, ADMINS)
+        try:
+            send_admin_feedback.delay(self.object.theme, self.object.message, self.object.from_email)
+            messages.success(self.request, 'Ваш отзыв отправлен!', extra_tags='success')
+        except Exception:
+            messages.success(self.request, 'Система отправки не пропускает Ваш отзыв', extra_tags='error')
         return response
