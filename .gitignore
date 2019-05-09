@@ -11,3 +11,5 @@ media/
 logs/
 .env
 staticfiles
+conf
+init-letsencrypt.sh

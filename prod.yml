@@ -7,9 +7,9 @@ services:
     restart: always
     container_name: prod_nginx
     volumes:
-      - /etc/letsencrypt/:/etc/letsencrypt/
-      - /etc/nginx/:/etc/nginx/
-      - /var/www/:/var/www/
+      - ../storage/cert/conf:/etc/letsencrypt
+      - ../storage/cert/www:/var/www/certbot
+      - ../storage/nginx:/etc/nginx/conf.d
       - .:/code
     ports:
       - 80:80
@@ -19,6 +19,12 @@ services:
       - web-daphne
     depends_on:
       - web
+      
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ../storage/cert/conf:/etc/letsencrypt
+      - ../storage/cert/www:/var/www/certbot
 
   rabbit:
     image: rabbitmq:3.7.8-management
@@ -26,8 +32,8 @@ services:
     env_file:
       - .env
     volumes:
-      - ../storage/mysite/rabbit:/var/lib/rabbitmq
-      - ../storage/mysite/rabbit/logs:/var/logs/rabbitmq
+      - ../storage/rabbit:/var/lib/rabbitmq
+      - ../storage/rabbit/logs:/var/logs/rabbitmq
 
   web-celery:
     build:
@@ -44,8 +50,8 @@ services:
   db:
     image: postgres:9.5
     volumes:
-      - ../storage/mysite/postgres:/var/lib/postgresql/data
-      - ../storage/mysite/for_dump:/dump
+      - ../storage/postgres:/var/lib/postgresql/data
+      - ../storage/for_dump:/dump
     restart: always
     env_file:
       - .env
@@ -54,7 +60,7 @@ services:
     image: redis
     restart: always
     volumes:
-      - ../storage/mysite/redis:/data
+      - ../storage/redis:/data
 
   web:
     build:
