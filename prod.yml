@@ -6,6 +6,7 @@ services:
     image: nginx:1.14
     restart: always
     container_name: prod_nginx
+    command: "/bin/sh -c 'while :; do sleep 24h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     volumes:
       - ../storage/cert/conf:/etc/letsencrypt
       - ../storage/cert/www:/var/www/certbot
@@ -19,9 +20,10 @@ services:
       - web-daphne
     depends_on:
       - web
-      
+
   certbot:
     image: certbot/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 168h & wait $${!}; done;'"
     volumes:
       - ../storage/cert/conf:/etc/letsencrypt
       - ../storage/cert/www:/var/www/certbot
